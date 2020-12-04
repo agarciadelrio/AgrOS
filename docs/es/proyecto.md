@@ -155,6 +155,6 @@ Estará basado en una solución Cliente/Servidor web mediante PHP, JavaScript, H
 ## Mockups
 
 ## Enlaces
-- [AgrOS main page](../README.md)
+- [AgrOS main page](../../README.md)
 
 
