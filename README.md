@@ -12,6 +12,9 @@ __Software para la gestión agrícola__
   - Proveer a los agricultores de las herramientas software necesarias para la gestión informática de sus explotaciones agrícolas.
   - Cumplir con los requisitos legales de la legislación española sobre la comunicación del cuaderno de campo de las explotaciones.
 
+## Technical notes / Notas técnicas
+- [Sobre el proyecto](docs/es/proyecto.md)
+
 ## Authors / Autores
 - Antonio Miguel García del Río <agarciadelrio@gmail.com>
 
