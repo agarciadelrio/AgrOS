@@ -7,9 +7,10 @@
 
 ## Descripción
 Aplicación online para la gestión de una explotación agrícola de pequeña escala y la generación de los documentos necesarios, como el Cuaderno de Campo, para su presentación a la Administración Local.
-Estará basado en una solición Cliente/Servidor web mediante PHP, JavaScript, HTML y CSS procurando usar todos los estándares posibles con vista a su libre distribución para la comunidad de pequeños agricultores. He elegido este stack de desarrollo por ser uno de los más utilizados hoy en día y se encuentran totalmente implantados desde hace años lo cual avala su estabilidad y garantiza su despliegue en prácticamente cualquier ISP o servidor local.
+Estará basado en una solución Cliente/Servidor web mediante PHP, JavaScript, HTML y CSS procurando usar todos los estándares posibles con vista a su libre distribución para la comunidad de pequeños agricultores. He elegido este stack de desarrollo por ser uno de los más utilizados hoy en día y se encuentra totalmente implantado desde hace años lo cual avala su estabilidad y garantiza su despliegue en prácticamente cualquier ISP o servidor local.
 
-Gobierno de Canarias Cuadernos de Campo [https://www.gobiernodecanarias.org/agricultura/temas/cuaderno/]
+### Documentación de referencia
+- Gobierno de Canarias Cuadernos de Campo [https://www.gobiernodecanarias.org/agricultura/temas/cuaderno/]
 
 ### Nombre de la Aplicación
 > __Cuaderno de Campo AgrOS__
