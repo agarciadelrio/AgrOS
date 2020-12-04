@@ -1,14 +1,18 @@
 # Proyecto AgrOS
 
-## Proyecto fin de grado superior de programación de apliaciones multiplataforma DAM
+## Proyecto fin de grado superior de programación de aplicaciones multiplataforma DAM
 - Centro: IES El Rincón. Las Palmas de Gran Canaria
 - Director de proyecto: D. Salvador Bordón Ruano
+- Autor: Antonio Miguel García del Río <agarciadelrio@gmail.com>
 
 ## Descripción
 Aplicación online para la gestión de una explotación agrícola de pequeña escala y la generación de los documentos necesarios, como el Cuaderno de Campo, para su presentación a la Administración Local.
-Estará basado en una solición Cliente/Servidor web mediante PHP, JavaScript, HTML y CSS procurando usar todos los estándares posibles con vista a su libre distribución para la comunidad de pequeños agricultores. He elegido esta stack de desarrollo por ser uno de los más utilizados hoy en día y están totalmente implantados desde hace años lo cual avala su estabilidad y garantiza su despliegue en prácticamente cualquier ISP o servidor local.
+Estará basado en una solición Cliente/Servidor web mediante PHP, JavaScript, HTML y CSS procurando usar todos los estándares posibles con vista a su libre distribución para la comunidad de pequeños agricultores. He elegido este stack de desarrollo por ser uno de los más utilizados hoy en día y se encuentran totalmente implantados desde hace años lo cual avala su estabilidad y garantiza su despliegue en prácticamente cualquier ISP o servidor local.
 
 Gobierno de Canarias Cuadernos de Campo [https://www.gobiernodecanarias.org/agricultura/temas/cuaderno/]
+
+### Nombre de la Aplicación
+> __Cuaderno de Campo AgrOS__
 
 ### Aplicaciones similares
 - GOIA [https://www.goia.es/]
@@ -48,9 +52,6 @@ Gobierno de Canarias Cuadernos de Campo [https://www.gobiernodecanarias.org/agri
 - MarkDown [http://markdown.github.io/]
 - Google Chrome [https://www.google.com/intl/es_es/chrome/]
 
-### Nombre de la Aplicación
-> __Cuaderno de Campo AgrOS__
-
 ### Tipos de usuarios
 - Administrador
 - Propietario
@@ -63,13 +64,12 @@ Gobierno de Canarias Cuadernos de Campo [https://www.gobiernodecanarias.org/agri
 - Acciones (Funcionalidades / Verbos)
 - Actores (Usuarios)
 
-![Ejemplo](img-01.png)
-![Actores](img-02.png)
-![Relaciones](img-03.png)
-![Relaciones2](img-04.png)
-![Ejemplo](img-05.png)
-![Ejemplo](img-06.png)
-![Ejemplo](img-07.png)
+|Ejemplos:||
+|-|-|
+|![Ejemplo](img-01.png)|![Actores](img-02.png)|
+|![Relaciones](img-03.png)|![Relaciones2](img-04.png)
+|![Ejemplo](img-05.png)|![Ejemplo](img-06.png)
+|![Ejemplo](img-07.png)|
 
 ### Casos de uso
 - Login
@@ -142,16 +142,16 @@ Gobierno de Canarias Cuadernos de Campo [https://www.gobiernodecanarias.org/agri
   - Cookies
   - Política de privacidad
   - Términos y condiciones
-  - RGPD [link](https://europa.eu/youreurope/business/dealing-with-customers/data-protection/data-protection-gdpr/index_es.htm)
+  - RGPD [link europa.eu](https://europa.eu/youreurope/business/dealing-with-customers/data-protection/data-protection-gdpr/index_es.htm)
 
 ### Acerca de
 - Info del autor
-- Versión
-- Licencia de uso
-
+  - Antonio Miguel García del Río
+  - <agarciadelrio@gmail.com>
+- Versión 0.1
+- Licencia de uso GPL v.3
 
 ## Mockups
-
 
 ## Enlaces
 - [AgrOS main page](../README.md)
