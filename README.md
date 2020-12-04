@@ -14,6 +14,7 @@ __Software para la gestión agrícola__
 
 ## Technical notes / Notas técnicas
 - [Sobre el proyecto](docs/es/proyecto.md)
+- [Casos de uso](docs/use-cases.md)
 
 ## Authors / Autores
 - Antonio Miguel García del Río <agarciadelrio@gmail.com>
