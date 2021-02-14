@@ -1,0 +1,13 @@
+section#login(data-bind="if: sub_state()=='login'")
+  h1.text-center.my-3 Login
+  .col.col-sm-6.mx-auto
+    form.form.form-login.maxw350.mx-auto.p-4.rounded(data-bind="submit: submitLogin" action="#" method="POST")
+      +inp('email', 'email','email','user().email',false, true)
+      +inp('password', 'password','password','user().password',false, true)
+      +inp('remember_me', 'checkbox','remember_me','remember_me',false)
+      .form-group
+        a(data-bind="setAppState: 'recover'" href="#recover") Remember password
+      .form-group
+        a(data-bind="setAppState: 'signup'" href="#signup") Don't have an account yet? Register
+      .mt-3
+        +btn()(type="submit").form-control Login

@@ -1,0 +1,14 @@
+{
+  "name": "Farm",
+  "table": "farm",
+  "fields": {
+    "active": {},
+    "location": {}
+  },
+  "list": {
+    "active": {}
+  },
+  "form": {
+    "active": {}
+  }
+}

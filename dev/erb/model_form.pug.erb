@@ -1,0 +1,23 @@
+.modal.fade#<%= @item_name %>Modal(tabindex="1")
+  .modal-dialog.modal-xl.modal-dialog-scrollable
+    .modal-content(data-bind="with: selected<%= @model_name %>")
+      .modal-header
+        h5.modal-title
+          span(data-bind="if: id!=0") <%= @model_name %> #[span(data-bind="text: name")]
+          span(data-bind="if: id==0") New <%= @model_name %> #[span(data-bind="text: name")]
+        button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+      .modal-body
+        form(action="#")
+          .mb-3
+            label.col-form-label(for="<%= @item_name %>-name") Name
+            input.form-control#<%= @item_name %>-name(type="text" data-bind="value: name")
+          <%- if @model -%>
+          <%- @model.form.each do |field,conf| -%>
+          .mb-3
+            label.col-form-label(for="<%= @item_name %>-<%= field %>") <%= field.capitalize %>
+            input.form-control#<%= @item_name %>-<%= field %>(type="text" data-bind="value: <%= field %>")
+          <%- end -%>
+          <%- end -%>
+      .modal-footer
+        button.btn.btn-secondary(data-bind="click: cancel" type="button" data-bs-dismiss="modal") Close
+        button.btn.btn-primary(data-bind="click: save" type="button" _data-bs-dismiss="modal") Save changes

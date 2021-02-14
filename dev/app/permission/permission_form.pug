@@ -1,0 +1,16 @@
+.modal.fade#permissionModal(tabindex="1")
+  .modal-dialog.modal-xl.modal-dialog-scrollable
+    .modal-content(data-bind="with: selectedPermission")
+      .modal-header
+        h5.modal-title
+          span(data-bind="if: id!=0") Permission #[span(data-bind="text: name")]
+          span(data-bind="if: id==0") New Permission #[span(data-bind="text: name")]
+        button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+      .modal-body
+        form(action="#")
+          .mb-3
+            label.col-form-label(for="permission-name") Name
+            input.form-control#permission-name(type="text" data-bind="value: name")
+      .modal-footer
+        button.btn.btn-secondary(data-bind="click: cancel" type="button" data-bs-dismiss="modal") Close
+        button.btn.btn-primary(data-bind="click: save" type="button" _data-bs-dismiss="modal") Save changes

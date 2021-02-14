@@ -1,0 +1,28 @@
+include ../_mixins
+section.d-none#user(data-bind="fadeVisible: api_token() && state()=='user'")
+  .container-fluid
+    nav.nav.d-flex.justify-content-between.align-items-center
+      h1.navbar-brand.text-shadow #[+modelIcon('user')] User
+      .nav-item.dropdown(data-bind="visible: User.someSelectedUser")
+        a.nav-link.dropdown-toggle(href="#" data-bs-toggle="dropdown") #[i.fa.fa-wrench(aria-hidden='true')] Actions
+        ul.dropdown-menu
+          li: a.dropdown-item(href="#duplicate") Duplicate
+          li: a.dropdown-item(data-bind="click: User.deleteSelected" href="#delete") Delete
+      .nav-item
+        button.btn.btn-primary.shadow(data-bs-toggle="modal" data-bs-target="#userModal" data-bind="click: User.newUser") #[i.fa.fa-plus] Add User
+  .container-fluid
+    .table-responsive.table-wrapper.rounded
+      table.table.table-sm.table-striped.table-hover
+        thead
+          tr
+            th.cursor-pointer(data-bind="click: User.deselectAll") #
+            th name
+            th email
+            th.text-end: +tableNav()
+        tbody(data-bind="foreach: users")
+          tr
+            td.id
+              input(type="checkbox" data-bind="checked: selected")
+            td.cursor-pointer.name(data-bs-toggle="modal" data-bs-target="#userModal" data-bind="click: select.bind($parent), text: name")
+            td.cursor-pointer.email(colspan="100%" data-bs-toggle="modal" data-bs-target="#userModal" data-bind="click: select.bind($parent), text: email")
+include user_form

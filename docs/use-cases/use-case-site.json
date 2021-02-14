@@ -1,0 +1,8 @@
+{
+  "name": "Public Site",
+  "description": "Los invitados pueden acceder a la parte web pública del Sitio y navegar entre páginas",
+  "actors": ["Guest"],
+  "scenario": ["Public Site"],
+  "actions": ["Browse"],
+  "route": ["GET:/","GET:/home"]
+}

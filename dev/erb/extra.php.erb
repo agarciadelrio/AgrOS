@@ -1,0 +1,20 @@
+<?php
+
+// En class_loader...
+function class_loader( $name ) {
+  $classes = [
+    '<%= @model_plural_name %>Controller' => API_PATH . '/app/controllers/<%= @model_plural_name %>Controller.php',
+  ];
+}
+
+// En routes
+
+Router::addRoutes([
+  'GET' => [
+    "$r/<%= @item_array_name %>/:id" => "<%= @model_plural_name %>Controller::get",
+    "$r/<%= @item_array_name %>" => "<%= @model_plural_name %>Controller::index",
+  ],
+  'POST' => [
+    "$r/<%= @item_array_name %>/:id" => "<%= @model_plural_name %>Controller::post",
+  ],
+]);

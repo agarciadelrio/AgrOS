@@ -1,0 +1,16 @@
+section#signup(data-bind="if: sub_state()=='signup'")
+  h1.text-center.my-3 Sign up
+  .col.col-sm-6.mx-auto
+    form.form.form-signup.mx-auto.p-4.rounded.maxw350(action="/register" method="POST")
+      +form({
+        email: ['email', null, true],
+        password: ['password', null, true],
+        password_confirm: ['password_confirm', 'confirmation', true],
+        accept: ['checkbox', 'accept_conditions', true],
+      })
+      .form-group
+        a(href="/legal" target="_blank") Read terms and conditions
+      .form-group
+        a(data-bind="setAppState: 'login'" href="#login") Already have an account?
+      .mt-3
+        +btn()(type="submit").form-control Register

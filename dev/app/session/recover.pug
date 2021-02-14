@@ -1,0 +1,13 @@
+section#recover(data-bind="if: sub_state()=='recover'")
+  h1.text-center.my-3 Recover
+  .col.col-sm-6.mx-auto
+    form.form.form-recover.maxw350.mx-auto.p-4.rounded(action="/remember-password" method="POST")
+      +form({
+        email: ['email'],
+      })
+      .form-group
+        a(data-bind="setAppState: 'login'" href="#login") Already have an account?
+      .form-group
+        a(data-bind="setAppState: 'signup'" href="#signup") Don't have an account yet? Register
+      .mt-3
+        +btn()(type="submit").form-control Send password to email

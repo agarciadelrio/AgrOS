@@ -1,0 +1,16 @@
+.modal.fade#profileModal(tabindex="1")
+  .modal-dialog.modal-xl.modal-dialog-scrollable
+    .modal-content(data-bind="with: selectedProfile")
+      .modal-header
+        h5.modal-title
+          span(data-bind="if: id!=0") Profile #[span(data-bind="text: name")]
+          span(data-bind="if: id==0") New Profile #[span(data-bind="text: name")]
+        button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+      .modal-body
+        form(action="#")
+          .mb-3
+            label.col-form-label(for="profile-name") Name
+            input.form-control#profile-name(type="text" data-bind="value: name")
+      .modal-footer
+        button.btn.btn-secondary(data-bind="click: cancel" type="button" data-bs-dismiss="modal") Close
+        button.btn.btn-primary(data-bind="click: save" type="button" _data-bs-dismiss="modal") Save changes

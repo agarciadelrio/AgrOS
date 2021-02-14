@@ -1,0 +1,60 @@
+include ../_mixins
+nav#menu.navbar.navbar-expand-lg.mb-2.navbar-light.bg-light
+  .container-fluid
+    a.navbar-brand(href="#") AgrOS
+    button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav")
+      span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse(data-bind="if: api_token")
+      ul.navbar-nav
+        -
+          let options = ['about',
+            [
+              'company',
+              'company',
+              'contact',
+              'farm',
+              'handler',
+              'member',
+              'parcel',
+              'plot',
+              'property',
+            ],
+            'dashboard',
+            'desktop',
+            'notebook',
+            [
+              'production',
+              'item',
+              'product',
+              'stuff',
+              'task',
+              'taxonomy',
+              'variety',
+            ],
+            [
+              'session',
+              'login',
+              'logout',
+              'recover',
+              'signup',
+            ],
+            [
+              'user',
+              'authorization',
+              'permission',
+              'profile',
+              'team',
+              'user',
+            ],
+          ]
+        each val in options
+          if Array.isArray(val)
+            - let ind = val.shift()
+            li.nav-item.dropdown
+              a.nav-link.dropdown-toggle(href='#' data-bs-toggle="dropdown")= ind
+              ul.dropdown-menu
+                each sub_ind in val
+                  li: a.dropdown-item(data-bind=`click: setState.bind($data,'${sub_ind}')` href="#")= sub_ind
+          else
+            li.nav-item
+              a.nav-link(data-bind=`click: setState.bind($data,'${val}')` href=`#${val}`)= val

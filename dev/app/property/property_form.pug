@@ -1,0 +1,34 @@
+.modal.fade#propertyModal(tabindex="1")
+  .modal-dialog.modal-xl.modal-dialog-scrollable
+    .modal-content(data-bind="with: selectedProperty")
+      .modal-header
+        h5.modal-title
+          span(data-bind="if: id!=0") Property #[span(data-bind="text: name")]
+          span(data-bind="if: id==0") New Property #[span(data-bind="text: name")]
+        button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+      .modal-body
+        form(action="#")
+          .mb-3
+            label.col-form-label(for="property-name") Name
+            input.form-control#property-name(type="text" data-bind="value: name")
+          .mb-3
+            label.col-form-label(for="property-active") Active
+            input.form-control#property-active(type="text" data-bind="value: active")
+          .mb-3
+            label.col-form-label(for="property-register_code") Register_code
+            input.form-control#property-register_code(type="text" data-bind="value: register_code")
+          .mb-3
+            label.col-form-label(for="property-description") Description
+            input.form-control#property-description(type="text" data-bind="value: description")
+          .mb-3
+            label.col-form-label(for="property-latitude") Latitude
+            input.form-control#property-latitude(type="text" data-bind="value: latitude")
+          .mb-3
+            label.col-form-label(for="property-longitude") Longitude
+            input.form-control#property-longitude(type="text" data-bind="value: longitude")
+          .mb-3
+            label.col-form-label(for="property-altitude") Altitude
+            input.form-control#property-altitude(type="text" data-bind="value: altitude")
+      .modal-footer
+        button.btn.btn-secondary(data-bind="click: cancel" type="button" data-bs-dismiss="modal") Close
+        button.btn.btn-primary(data-bind="click: save" type="button" _data-bs-dismiss="modal") Save changes

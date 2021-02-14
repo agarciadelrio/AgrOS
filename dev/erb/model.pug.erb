@@ -1,0 +1,38 @@
+include ../_mixins
+section.d-none#<%= @item_name %>(data-bind="fadeVisible: state()=='<%= @item_name %>'")
+  .container-fluid
+    nav.nav.d-flex.justify-content-between.align-items-center
+      h1.navbar-brand.text-shadow #[+modelIcon('<%= @item_name %>')] <%= @item_array_name.capitalize %>
+      .nav-item.dropdown(data-bind="visible: <%= @model_name %>.someSelected<%= @model_name %>")
+        a.nav-link.dropdown-toggle(href="#" data-bs-toggle="dropdown") #[i.fa.fa-wrench(aria-hidden='true')] Actions
+        ul.dropdown-menu
+          li: a.dropdown-item(href="#duplicate") Duplicate
+          li: a.dropdown-item(data-bind="click: <%= @model_name %>.deleteSelected" href="#delete") Delete
+      .nav-item
+        button.btn.btn-primary.shadow(data-bs-toggle="modal" data-bs-target="#<%= @item_name %>Modal" data-bind="click: <%= @model_name %>.new<%= @model_name %>") #[i.fa.fa-plus] Add <%= @model_name %>
+  .container-fluid
+    .table-responsive.table-wrapper.rounded
+      table.table-list.table.table-striped.table-hover
+        thead
+          tr
+            th.cursor-pointer(data-bind="click: <%= @model_name %>.deselectAll") #
+            th name
+            <%- if @model -%>
+            <%- @model.list.each do |field,conf| -%>
+            th <%= field %>
+            <%- end -%>
+            <%- end -%>
+            th.text-end: +tableNav()
+        tbody(data-bind="foreach: <%= @item_array_name %>")
+          tr
+            td.id
+              input(type="checkbox" data-bind="checked: selected")
+            td.name.text-primary(<%= !@model ? 'colspan="100%" ' : ''%>data-bs-toggle="modal" data-bs-target="#<%= @item_name %>Modal" data-bind="click: select.bind($parent), text: name")
+            <%- if @model -%>
+            <%- @model.list.each do |field,conf| -%>
+            td.<%= field %>(<%= @model.list.keys.last == field ? 'colspan="100%" ' : ''%>data-bind="text: <%= field %>") <%= field %>
+            <%- end -%>
+            <%- end -%>
+            //-td.text-end
+            //-  button.btn.btn-sm.btn-link(data-bs-toggle="modal" data-bs-target="#<%= @item_name %>Modal" data-bind="click: select.bind($parent)") edit
+include <%= @item_name %>_form

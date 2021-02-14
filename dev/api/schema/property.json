@@ -1,0 +1,24 @@
+{
+  "name": "Property",
+  "table": "property",
+  "fields": {
+    "active": {},
+    "register_code": {},
+    "description": {},
+    "latitude": {},
+    "longitude": {},
+    "altitude": {}
+  },
+  "list": {
+    "active": {},
+    "register_code": {}
+  },
+  "form": {
+    "active": {},
+    "register_code": {},
+    "description": {},
+    "latitude": {},
+    "longitude": {},
+    "altitude": {}
+  }
+}

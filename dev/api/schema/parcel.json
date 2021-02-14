@@ -1,0 +1,15 @@
+{
+  "name": "Parcel",
+  "table": "parcel",
+  "fields": {
+    "active": {},
+    "farm_id": {}
+  },
+  "list": {
+    "active": {}
+  },
+  "form": {
+    "active": {},
+    "farm_id": {}
+  }
+}

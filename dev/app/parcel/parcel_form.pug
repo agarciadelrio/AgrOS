@@ -1,0 +1,22 @@
+.modal.fade#parcelModal(tabindex="1")
+  .modal-dialog.modal-xl.modal-dialog-scrollable
+    .modal-content(data-bind="with: selectedParcel")
+      .modal-header
+        h5.modal-title
+          span(data-bind="if: id!=0") Parcel #[span(data-bind="text: name")]
+          span(data-bind="if: id==0") New Parcel #[span(data-bind="text: name")]
+        button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+      .modal-body
+        form(action="#")
+          .mb-3
+            label.col-form-label(for="parcel-name") Name
+            input.form-control#parcel-name(type="text" data-bind="value: name")
+          .mb-3
+            label.col-form-label(for="parcel-active") Active
+            input.form-control#parcel-active(type="text" data-bind="value: active")
+          .mb-3
+            label.col-form-label(for="parcel-farm_id") Farm_id
+            input.form-control#parcel-farm_id(type="text" data-bind="value: farm_id")
+      .modal-footer
+        button.btn.btn-secondary(data-bind="click: cancel" type="button" data-bs-dismiss="modal") Close
+        button.btn.btn-primary(data-bind="click: save" type="button" _data-bs-dismiss="modal") Save changes

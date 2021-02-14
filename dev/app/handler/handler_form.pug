@@ -1,0 +1,25 @@
+.modal.fade#handlerModal(tabindex="1")
+  .modal-dialog.modal-xl.modal-dialog-scrollable
+    .modal-content(data-bind="with: selectedHandler")
+      .modal-header
+        h5.modal-title
+          span(data-bind="if: id!=0") Handler #[span(data-bind="text: name")]
+          span(data-bind="if: id==0") New Handler #[span(data-bind="text: name")]
+        button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+      .modal-body
+        form(action="#")
+          .mb-3
+            label.col-form-label(for="handler-name") Name
+            input.form-control#handler-name(type="text" data-bind="value: name")
+          .mb-3
+            label.col-form-label(for="handler-code") Code
+            input.form-control#handler-code(type="text" data-bind="value: code")
+          .mb-3
+            label.col-form-label(for="handler-vat") Vat
+            input.form-control#handler-vat(type="text" data-bind="value: vat")
+          .mb-3
+            label.col-form-label(for="handler-description") Description
+            input.form-control#handler-description(type="text" data-bind="value: description")
+      .modal-footer
+        button.btn.btn-secondary(data-bind="click: cancel" type="button" data-bs-dismiss="modal") Close
+        button.btn.btn-primary(data-bind="click: save" type="button" _data-bs-dismiss="modal") Save changes

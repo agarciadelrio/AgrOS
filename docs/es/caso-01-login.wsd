@@ -1,0 +1,21 @@
+@startuml cosa
+left to right direction
+:Guest: as g << Human >>
+:User: as u << Human >>
+package Professional {
+  :Chef: as c
+  :Food Critic: as fc
+}
+package Systema {
+  (Eat Food) as UC1
+  (Pay for Food) as UC2
+  (Drink) as UC3
+  (Review) as UC4
+}
+u --|> g
+fc -- UC4
+UC2 -- UC3
+u -- UC1
+u -- UC2
+u -- UC3
+@enduml

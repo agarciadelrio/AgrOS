@@ -1,0 +1,13 @@
+{
+  "name": "Team",
+  "table": "team",
+  "fields": {
+    "personal_team": {}
+  },
+  "list": {
+    "personal_team": {}
+  },
+  "form": {
+    "personal_team": {}
+  }
+}

@@ -1,0 +1,58 @@
+mixin inp(label,type,id,name, value='',required=false)
+  .mb-3
+    case type
+      when 'checkbox'
+        label.d-block
+          input(type="hidden" name=name required=required value="0")
+          input(type="checkbox" name=name required=required value="1" checked=value)
+          |&nbsp;
+          span= label
+      default
+        label.form-label(for=id)= label
+        input.form-control(data-bind=`value: ${name}` id=id type=type name=name
+          placeholder=label required=required value!=value)
+
+
+mixin form(fields={})
+  each attr, _name in fields
+    -
+      _type = attr[0] || 'text'
+      _label = attr[1] || _name
+      _required = attr[2] || null
+      _value = attr[3] || null
+    .mb-3
+      case _type
+        when 'checkbox'
+          label.d-block
+            input(type="checkbox" name=_name required=_required value="on" checked=_value)
+            |&nbsp;
+            span= _label
+        default
+          label.form-label(for=_name)= _label
+          input.form-control(id=_name type=_type name=_name placeholder=_name required=_required value!=_value)
+
+mixin btn(klass='primary')
+  button.btn(type='button' class=`btn-${klass}`)&attributes(attributes)
+    if block
+        block
+
+mixin ifCanDo(action)
+  <?php if(Sessions::canDo('#{action}')): ?>
+  block
+  <?php endif ?>
+
+mixin ifCanDoVar(variable)
+  <?php if(Sessions::canDo(#{variable})): ?>
+  block
+  <?php endif ?>
+
+mixin forEach(conf)
+  <?php foreach( !{conf} ): ?>
+  block
+  <?php endforeach; ?>
+
+mixin tableNav()
+  | &lt; 1/10 &gt;
+
+mixin modelIcon(model)
+  i.fa(data-bind=`class: 'fa-'+App.icons['${model}']`)

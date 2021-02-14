@@ -1,0 +1,40 @@
+include ./app/_mixins
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="style.sass")
+    script(src="../node_modules/jquery/dist/jquery.min.js")
+    //-script(src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js")
+    script(src="/app.ts")
+    title TEST1
+  body.application
+    include ./app/menu/menu
+    include ./app/session/session
+    include ./app/about/about
+    include ./app/authorization/authorization
+    include ./app/company/company
+    include ./app/contact/contact
+    include ./app/dashboard/dashboard
+    include ./app/desktop/desktop
+    include ./app/farm/farm
+    include ./app/handler/handler
+    include ./app/item/item
+    include ./app/loader/loader
+    include ./app/member/member
+    include ./app/modal/modal
+    include ./app/notebook/notebook
+    include ./app/parcel/parcel
+    include ./app/permission/permission
+    include ./app/plot/plot
+    include ./app/product/product
+    include ./app/profile/profile
+    include ./app/property/property
+    include ./app/stuff/stuff
+    include ./app/task/task
+    include ./app/taxonomy/taxonomy
+    include ./app/team/team
+    include ./app/user/user
+    include ./app/variety/variety
+    include ./app/debug/debug

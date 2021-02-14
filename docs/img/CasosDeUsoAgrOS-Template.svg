@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" width="500px" height="300px" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      line {
+        stroke: #000000;
+      }
+      path {
+        stroke: #000000;
+        fill: #FFFFFF;
+      }
+      ellipse {
+        fill: #FFFFFF;
+        stroke: #000000;
+      }
+      text {
+        fill: #000000;
+        font-family: Helvetica;
+        font-size: 12px;
+        white-space: pre;
+      }
+      .text-middle {
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+  <g transform="translate(160,5)">
+    <path d="M 0 0 h 250 v 200 h -250z"/>
+    <path d="M 0 0 h 60 v 15 l -5 5 h -55z"/>
+    <text x="5" y="15">Sytem</text>
+  </g>
+  <g>
+    <path d="M120 100 h 200"/>
+  </g>
+  <g id="UseCAse" transform="translate(300,100)">
+    <ellipse rx="70" ry="35"/>
+    <text y="4" class="text-middle">Case Use name</text>
+  </g>
+  <g id="User" transform="translate(100,70)">
+    <g>
+      <line x1="0" y1="0" x2="0" y2="40"/>
+      <line x1="-25" y1="20" x2="25" y2="20"/>
+      <line x1="0" y1="40" x2="25" y2="80"/>
+      <line x1="0" y1="40" x2="-25" y2="80"/>
+    </g>
+    <ellipse rx="10" ry="10"/>
+    <text y="90" class="text-middle">User</text>
+  </g>
+</svg>

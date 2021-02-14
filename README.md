@@ -21,3 +21,8 @@ __Software para la gestión agrícola__
 
 ## License / Licencia
 - GPL v.3
+
+## Install
+- Email testing:
+  - Docker install mailcatcher on port 1025
+  - Development email tests edit /etc/postfix/main.cf and set relayhost = 127.0.0.1:1025 (if you are using sendmail)

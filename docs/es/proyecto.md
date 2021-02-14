@@ -54,11 +54,11 @@ Estará basado en una solución Cliente/Servidor web mediante PHP, JavaScript, H
 - Google Chrome [https://www.google.com/intl/es_es/chrome/]
 
 ### Tipos de usuarios
-- Administrador
-- Propietario
-- Productor
-- Trabajador
-- Cliente
+- Administrador (breve descripción)
+- Propietario (breve descripción)
+- Productor (breve descripción)
+- Trabajador (breve descripción)
+- Cliente (breve descripción)
 
 #### Casos de uso (Modelado)
 - Contexto (Dónde se va a utilizar)
@@ -156,5 +156,40 @@ Estará basado en una solución Cliente/Servidor web mediante PHP, JavaScript, H
 
 ## Enlaces
 - [AgrOS main page](../../README.md)
+- [Caso de uso](https://es.wikipedia.org/wiki/Caso_de_uso)
+- [Diagrama de Caso de uso](https://es.wikipedia.org/wiki/Diagrama_de_casos_de_uso)
 
+<div style="page-break-after: always;"></div>
+
+
+```mermaid
+stateDiagram
+    [*] --> First
+    state First {
+        [*] --> second
+        second --> [*]
+    }
+```
+```plantumlcode
+@startuml
+Bob -[#red]> Alice : hello
+Alice -[#0000FF]->Bob : ok
+@enduml
+```
+```plantumlcode
+@startuml
+left to right direction
+actor "Food Critic" as fc
+rectangle Restaurant {
+  usecase "Eat Food" as UC1
+  usecase "Pay for Food" as UC2
+  usecase "Drink" as UC3
+}
+fc -- UC1
+fc --> UC2
+fc --> UC3
+@enduml
+```
+
+<hr/>
 
