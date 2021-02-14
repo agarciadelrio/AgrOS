@@ -21,7 +21,7 @@ export class Company {
     return false
   })
 
-  static selectedCompanys = ko.pureComputed(() => {
+  static selectedCompanies = ko.pureComputed(() => {
     return Company.app.companies().filter((item:Company) => item.selected())
   })
 
@@ -38,19 +38,38 @@ export class Company {
   }
 
   static deleteSelected = (app:App, e:MouseEvent) => {
-    if(confirm('Are you sure you want to delete these items?')) {
-      console.log('Company CLICK DELETE SELECTED',e, e.altKey)
-      const body = {
-        action: 'delete',
-        company_ids: Company.selectedCompanys().map((company) => company.id)
-      }
-      console.log('Company IDS', body)
-      // TODO: post company_ids for delete to the PHP-API
+    if(!confirm('Are you sure you want to delete these items?')) {
+      return false;
     }
+
+    const body = {
+      action: 'delete',
+      company_ids: Company.selectedCompanies().map((company) => company.id)
+    }
+
+    const url = `${Company.api_url}/delete`
+    const options = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'API_TOKEN:' + Company.app.api_token(),
+      },
+      body: JSON.stringify(body)
+    }
+
+    fetch(url,options).then((response) => {
+      return response.json()
+    }).then((data) => {
+      if(data.msg=='DELETE') {
+        Company.app.companies.remove( item => data.ids.includes(item.id) )
+      }
+    })
   }
 
   id: number
   name: ko.Observable<string>
+
   selected: ko.Observable<boolean>
 
   constructor(options: CompanyOptions) {
@@ -61,14 +80,14 @@ export class Company {
 
   static newCompany(app:App,e:MouseEvent) {
     console.log('NEW Company CLICK',app,e)
-    const new_company = new Company({id:0, name:'...'})
+    const new_company = new Company({
+      id:0,
+      name:'',
+    })
     app.selectedCompany(new_company)
   }
 
   static loadData(companies:ko.ObservableArray<Company>) {
-    if(!Company.app.api_token()) {
-      Company.app.setState('login')
-    }
     const options = {
       method: 'GET',
       headers: {
@@ -80,7 +99,6 @@ export class Company {
     fetch(Company.api_url,options).then((response) => {
       return response.json()
     }).then((data) => {
-      console.log('DATA', data)
       companies([])
       data.companies.forEach((company:CompanyOptions) => {
         companies.push(new Company(company))

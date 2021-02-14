@@ -20,7 +20,12 @@ class CompaniesController extends SessionController {
   public static function index($params=[]) {
     self::check_api_token();
     $total_companies = self::$USER->countOwn('company');
-    $companies = R::getAll("SELECT id, name FROM company WHERE user_id=?", [self::$USER->id]);
+    $fields = [
+      'id',
+      'name',
+    ];
+    $fields = implode(',', $fields);
+    $companies = R::getAll("SELECT $fields FROM company WHERE user_id=?", [self::$USER->id]);
 
     self::json([
       'total_companies' => $total_companies,
@@ -84,7 +89,11 @@ class CompaniesController extends SessionController {
     }
     $total_companies = $company->id>0 ? 1 : 0;
     if($company) {
-      $company->import( $data, 'name' );
+      $fields = [
+        'name',
+      ];
+      $fields = implode(',', $fields);
+      $company->import( $data, $fields );
       R::store( $company );
       self::json([
         'total_companies' => $total_companies,
@@ -107,5 +116,42 @@ class CompaniesController extends SessionController {
         '_SERVER' => $_SERVER,
       ]);
     }
+  }
+
+  /**
+   * Elimina un conjunto de companies.
+   *
+   * @param string $data->action
+   * @param string $data->company_ids
+   *
+   * @return json
+   */
+  public static function delete($params=[]) {
+    self::check_api_token();
+    $json = file_get_contents('php://input');
+    $data = json_decode($json);
+    if(isset($data->action) && $data->action=='delete') {
+      if(isset($data->company_ids)) {
+        $companies = self::$USER->withCondition(
+          'id in (' . R::genSlots( $data->company_ids ) . ')',
+          $data->company_ids )->ownCompanyList;
+        $ids = array_keys($companies);
+        R::trashAll( $companies );
+        self::json([
+          'msg' => 'DELETE',
+          'ids' => $ids,
+        ]);
+        die;
+      } else {
+        header("HTTP/1.0 400 Bad Request");
+      }
+    } else {
+      header("HTTP/1.0 400 Bad Request");
+    }
+    self::json([
+      'msg' => 'DELETE ERROR',
+      'params' => $params,
+      'data' => $data,
+    ]);
   }
 }

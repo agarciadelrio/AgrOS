@@ -1,5 +1,5 @@
 include ../_mixins
-section.d-none#company(data-bind="fadeVisible: api_token() && state()=='company'")
+section.d-none#company(data-bind="fadeVisible: state()=='company'")
   .container-fluid
     nav.nav.d-flex.justify-content-between.align-items-center
       h1.navbar-brand.text-shadow #[+modelIcon('company')] Companies
@@ -22,7 +22,7 @@ section.d-none#company(data-bind="fadeVisible: api_token() && state()=='company'
           tr
             td.id
               input(type="checkbox" data-bind="checked: selected")
-            td.name.w-100(colspan="100%" data-bs-toggle="modal" data-bs-target="#companyModal" data-bind="click: select.bind($parent), text: name")
+            td.name.text-primary(colspan="100%" data-bs-toggle="modal" data-bs-target="#companyModal" data-bind="click: select.bind($parent), text: name")
             //-td.text-end
             //-  button.btn.btn-sm.btn-link(data-bs-toggle="modal" data-bs-target="#companyModal" data-bind="click: select.bind($parent)") edit
 include company_form

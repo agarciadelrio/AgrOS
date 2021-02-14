@@ -26,7 +26,7 @@ export class <%= @model_name %> {
     return false
   })
 
-  static selected<%= @model_name %>s = ko.pureComputed(() => {
+  static selected<%= @model_plural_name %> = ko.pureComputed(() => {
     return <%= @model_name %>.app.<%= @item_array_name %>().filter((item:<%= @model_name %>) => item.selected())
   })
 
@@ -43,15 +43,33 @@ export class <%= @model_name %> {
   }
 
   static deleteSelected = (app:App, e:MouseEvent) => {
-    if(confirm('Are you sure you want to delete these items?')) {
-      console.log('<%= @model_name %> CLICK DELETE SELECTED',e, e.altKey)
-      const body = {
-        action: 'delete',
-        <%= item_name %>_ids: <%= @model_name %>.selected<%= @model_name %>s().map((<%= item_name %>) => <%= item_name %>.id)
-      }
-      console.log('<%= @model_name %> IDS', body)
-      // TODO: post <%= item_name %>_ids for delete to the PHP-API
+    if(!confirm('Are you sure you want to delete these items?')) {
+      return false;
     }
+
+    const body = {
+      action: 'delete',
+      <%= item_name %>_ids: <%= @model_name %>.selected<%= @model_plural_name %>().map((<%= item_name %>) => <%= item_name %>.id)
+    }
+
+    const url = `${<%= @model_name %>.api_url}/delete`
+    const options = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'API_TOKEN:' + <%= @model_name %>.app.api_token(),
+      },
+      body: JSON.stringify(body)
+    }
+
+    fetch(url,options).then((response) => {
+      return response.json()
+    }).then((data) => {
+      if(data.msg=='DELETE') {
+        <%= @model_name %>.app.<%= @item_array_name %>.remove( item => data.ids.includes(item.id) )
+      }
+    })
   }
 
   id: number

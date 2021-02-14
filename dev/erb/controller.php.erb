@@ -137,4 +137,41 @@ class <%= @model_plural_name %>Controller extends SessionController {
       ]);
     }
   }
+
+  /**
+   * Elimina un conjunto de <%= @item_array_name %>.
+   *
+   * @param string $data->action
+   * @param string $data-><%= @item_name %>_ids
+   *
+   * @return json
+   */
+  public static function delete($params=[]) {
+    self::check_api_token();
+    $json = file_get_contents('php://input');
+    $data = json_decode($json);
+    if(isset($data->action) && $data->action=='delete') {
+      if(isset($data-><%= @item_name %>_ids)) {
+        $<%= @item_array_name %> = self::$USER->withCondition(
+          'id in (' . R::genSlots( $data-><%= @item_name %>_ids ) . ')',
+          $data-><%= @item_name %>_ids )->own<%= @model_name %>List;
+        $ids = array_keys($<%= @item_array_name %>);
+        R::trashAll( $<%= @item_array_name %> );
+        self::json([
+          'msg' => 'DELETE',
+          'ids' => $ids,
+        ]);
+        die;
+      } else {
+        header("HTTP/1.0 400 Bad Request");
+      }
+    } else {
+      header("HTTP/1.0 400 Bad Request");
+    }
+    self::json([
+      'msg' => 'DELETE ERROR',
+      'params' => $params,
+      'data' => $data,
+    ]);
+  }
 }

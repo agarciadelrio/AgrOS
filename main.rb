@@ -70,7 +70,7 @@ for d in [
   #['./tmp', 'Stuff', 'Stuffs', 'stuff', 'stuffs'],
   #['./tmp', 'Task', 'Tasks', 'task', 'tasks'],
   #['./tmp', 'Taxonomy', 'Taxonomies', 'taxonomy', 'taxonomies'],
-  ['./tmp', 'Team', 'Teams', 'team', 'teams'],
+  #['./tmp', 'Team', 'Teams', 'team', 'teams'],
   #['./tmp', 'User', 'Users', 'user', 'users'],
   #['./tmp', 'Variety', 'Varieties', 'variety', 'varieties'],
 ]

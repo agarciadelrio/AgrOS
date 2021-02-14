@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "mkmodel": "echo ${npm_config_name}; mkdir -p ./dev/app/${npm_config_name}; touch ./dev/app/${npm_config_name}/${npm_config_name}.pug"
+    "mkmodel": "echo ${npm_config_name}; mkdir -p ./dev/app/${npm_config_name};",
+    "dev": "parcel watch dev/index.pug",
+    "gulp": "gulp php",
+    "serve": "php -S agros.localhost:8080 -t dist"
   },
   "keywords": [],
   "author": "",
