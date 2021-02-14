@@ -9,19 +9,21 @@
     "**/.sass-cache": true,
     "**/.cache": true,
     "**/*.pyc": true,
-    "**/__pycache__/": true
+    "**/__pycache__/": true,
+    "dist": true
   },
   "search.exclude": {
+    "**/.git/**": true,
     "**/node_modules": true,
     "**/bower_components": true,
-    "./dist": true,
-    "./tmp": true,
+    "dist": true,
+    "tmp": true,
   },
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
     "**/node_modules/*/**": true,
-    "./dist": true,
-    "./tmp": true,
+    "dist": true,
+    "tmp": true,
   }
 }
