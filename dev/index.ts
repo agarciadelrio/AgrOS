@@ -1,4 +1,3 @@
-import '@fortawesome/fontawesome-free/css/all.css'
 import $ from 'jquery'
 
 //import S2 from 'select2/dist/js/select2.js'

@@ -1,8 +1,6 @@
-<section class="container-fluid">
+<section class="container-fluid mt-3">
   <div class="glass rounded shadow p-3">
-    <h1>Dashboard</h1>
-    <code class="text-dark"><?= hs($ses) ?></code>
-    <?= hs($user->name) ?>
+    <h1><i class="<?= W::fa('dashboard') ?>"></i> <?= _t('dashboard') ?></h1>
     <hr/>
     <a href="/user">User</a>
     <a href="/contact">Contact</a>

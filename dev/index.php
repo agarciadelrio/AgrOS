@@ -57,6 +57,9 @@ if(file_exists('app/widgets/forms_widget.php')) {
 if(file_exists('app/widgets/menus_widget.php')) {
   require 'app/widgets/menus_widget.php';
 }
+if(file_exists('app/widgets/icons_widget.php')) {
+  require 'app/widgets/icons_widget.php';
+}
 
 //- Datos de configuración del Site
 if(file_exists('app/config/site.php')) {

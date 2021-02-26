@@ -5,7 +5,7 @@
     <form action="/recover" method="post">
       <div class="mb-3 text-center">
         <p>Ops! Parece que algo ha salido mal.</p>
-        <p><?= hs($message) ?></p>
+        <p><?= $message ?></p>
         <p>Vuelve a intentarlo en otro momento o contacta con el
           <a href="mailto:admin@agros.jaira.com" target="_blank">administrador</a>.</p>
       </div>

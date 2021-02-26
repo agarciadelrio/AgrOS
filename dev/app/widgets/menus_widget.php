@@ -1,7 +1,17 @@
 <?php
+function isActive($route) { if(Router::$route == $route) return "active"; }
+function menuItem($route, $icon=False) {
+  if($icon) {
+    return "<a class=\"nav-link " . isActive("/$route") . "\" href=\"/$route\">"
+      . '<i class="' . W::fa($icon) . '"></i> '
+      . _t($route) . "</a>";
+  } else {
+    return "<a class=\"nav-link " . isActive("/$route") . "\" href=\"/$route\">" . _t($route) . "</a>";
+  }
+}
 Widget::register('main_menu', function($p1) {
 ?>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+  <nav class="navbar navbar-agros navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand mr-md-3" href="/dashboard">
           <img src="/app/assets/img/agros-logo.svg" width="30" height="30" style="vertical-align: bottom;"/>
@@ -13,11 +23,21 @@ Widget::register('main_menu', function($p1) {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="/desktop">Desktop</a>
+            <?= menuItem('dashboard') ?>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <?= menuItem('companies') ?>
           </li>
+          <li class="nav-item">
+            <?= menuItem('categories') ?>
+          </li>
+          <li class="nav-item">
+            <?= menuItem('contacts') ?>
+          </li>
+          <li class="nav-item">
+            <?= menuItem('users') ?>
+          </li>
+          <?php /*
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Dropdown
@@ -32,6 +52,7 @@ Widget::register('main_menu', function($p1) {
           <li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
           </li>
+          */ ?>
         </ul>
         <?php /*
         <form class="d-flex">
@@ -43,10 +64,10 @@ Widget::register('main_menu', function($p1) {
 
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" href="/profile">Perfil</a>
+              <?= menuItem('profile', 'profile') ?>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/logout">Salir</a>
+              <?= menuItem('logout','logout') ?>
             </li>
           </ul>
         </div>

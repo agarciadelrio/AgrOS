@@ -1,11 +1,7 @@
-<section class="container-fluid">
+<section class="container-fluid mt-3">
   <div class="glass rounded shadow p-3">
-    <h1>Profile <?= hs($user->name) ?></h1>
-    <?php /*
-    <code class="text-dark"><?= $ses ?></code>
-    <?= hs($user->name) ?>
+    <h1><i class="fa fa-fw fa-address-card"></i> Profile <?= hs($user->name) ?></h1>
     <hr/>
-    */ ?>
     <form action="#" method="post" autocomplete="off" class="mt-4 p-0">
       <div class="fields-wrapper">
           <div class="row">

@@ -15,39 +15,6 @@
   <body class="application <?= View::bodyClassTheme() ?>">
     <div class="<?= View::bodyWrapperClass() ?>">
       <?= W::main_menu() ?>
-      <?php /*
-      <nav class="navbar navbar-expand-lg main-menu">
-        <a class="navbar-brand mr-md-2" href="/dashboard">
-          <img src="/app/assets/img/agros-logo.svg" width="30" height="30" style="vertical-align: bottom;"/>
-          AgrOS 1.0
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <div class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <?php if(isset($user)): ?>
-            <?= renderMenu($user->menus(), TRUE) ?>
-            <?php endif;?>
-          </div>
-          <!--form action="#" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="<?= _t('Search') ?>" aria-label="<?= _t('Search') ?>">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><?= _t('Search') ?></button>
-          </form-->
-          <div class="navbar-nav mt-2 mt-lg-0 ml-2">
-            <?php if(isset($user) && $user->ownPropertyList): ?>
-            <select name="default-property" id="defaultPropertySelector" class="custom-select mx-2">
-              <?php foreach($user->ownPropertyList as $property): ?>
-                <!--option value="<?= $property->id ?>"><?= $property->name ?></option-->
-                <option value="<?= $property->id ?>" <?= $property->id==$user->property_id ? 'selected':'' ?>><?= $property->name ?></option>
-              <?php endforeach; ?>
-            </select>
-            <?php endif ?>
-            <?= renderMenu(MENUS['app'], TRUE) ?>
-          </div>
-        </div>
-      </nav>
-      */ ?>
       <?= View::header() ?>
       <?= View::aside() ?>
       <?php if(View::exists('notification')): ?>

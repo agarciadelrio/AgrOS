@@ -6,7 +6,9 @@ function class_loader( $name ) {
     'Profile' => COMPONENTS_PATH . '/dashboard/profile',
     'Task' => COMPONENTS_PATH . '/task/task',
     // CONTROLADORES
+    'CategoryController' => COMPONENTS_PATH . '/category/category_controller',
     'CompanyController' => COMPONENTS_PATH . '/company/company_controller',
+    'ContactController' => COMPONENTS_PATH . '/contact/contact_controller',
     'DashboardController' => COMPONENTS_PATH . '/dashboard/dashboard_controller',
     'FarmController' => COMPONENTS_PATH . '/farm/farm_controller',
     'HomeController' => COMPONENTS_PATH . '/home/home_controller',
@@ -14,6 +16,8 @@ function class_loader( $name ) {
     'PlotController' => COMPONENTS_PATH . '/plot/plot_controller',
     'SessionController' => COMPONENTS_PATH . '/session/session_controller',
     'TaskController' => COMPONENTS_PATH . '/task/task_controller',
+    'UserController' => COMPONENTS_PATH . '/user/user_controller',
+
     'TestController' => COMPONENTS_PATH . '/test/test_controller',
   ];
   if( isset($classes[$name]) ) {
