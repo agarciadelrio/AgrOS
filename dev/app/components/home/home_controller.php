@@ -105,6 +105,8 @@ class HomeController extends Controller {
    * @return [type]
    */
   public static function session_expired($params) {
+    self::$layout = 'minimal';
+    View::bodyWrapperClass('home-form');
     self::render('home/_session-expired');
   }
 }

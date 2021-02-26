@@ -1,8 +1,8 @@
 <section class="container-fluid">
   <div class="glass rounded shadow p-3">
     <h1>Dashboard</h1>
-    <code class="text-dark"><?= $ses ?></code>
-    <?= $user->name ?>
+    <code class="text-dark"><?= hs($ses) ?></code>
+    <?= hs($user->name) ?>
     <hr/>
     <a href="/user">User</a>
     <a href="/contact">Contact</a>
@@ -14,7 +14,7 @@
         <h2>Empresas</h2>
         <ul>
           <? foreach ($user->ownCompanyList as $company): ?>
-          <li><a href="/company/<?= $company->id ?>"><?= $company->name ?></a></li>
+          <li><a href="/company/<?= $company->id ?>"><?= hs($company->name) ?></a></li>
           <? endforeach; ?>
         </ul>
         <h2>Granjas</h2>

@@ -19,29 +19,41 @@ Widget::register('values', function($p1){
     'options' => $opt['options'] ?? False,
     'caption' => $opt['caption'] ?? False,
     'columns' => $opt['columns'] ?? False,
+    'array' => $opt['array'] ?? [],
     'form_layout' => $opt['form_layout'] ?? [],
+    'bean' => $opt['bean'] ?? [],
   ];
 });
 
 Widget::register('input', function($p1) {
   extract(Widget::values($p1));
   $data_bind = "data-bind=\"value: $name\"";
+  $label_size = '';
+  if($size) {
+    $size = "form-select-$size";
+    $label_size = "col-form-label-$size";
+  };
+  if($bean) {
+    $value = hs(($bean[$name] ?? ''));
+  } else {
+    $value = '';
+  }
   if($form_layout && $form_layout['horizontal']):
     $label_w = $form_layout['label'] ?? 'sm-2';
     $input_w = $form_layout['input'] ?? 'sm-10';
   ?>
     <div class="row mb-md-3 g-2">
-      <label for="<?= $id ?>" class="col-<?= $label_w ?> col-form-label"><?= _t($label) ?></label>
+      <label for="<?= $id ?>" class="col-<?= $label_w ?> col-form-label <?= $label_size ?>"><?= _t($label) ?></label>
       <div class="col-<?= $input_w ?>">
-        <input <?= $data_bind ?> type="<?= $type ?>" class="form-control" id="<?= $id ?>" name="<?= $name ?>"
-          <?= $disabled ?> <?= $required ?> />
+        <input <?= $data_bind ?> type="<?= $type ?>" class="form-control <?= $size ?>" id="<?= $id ?>" name="<?= $name ?>"
+          <?= $disabled ?> <?= $required ?> value="<?= $value ?>" />
       </div>
     </div>
   <? else: ?>
     <div class="col-<?= $col ?>">
-      <label for="<?= $id ?>" class="form-label d-none d-md-block"><?= _t($label) ?></label>
-      <input <?= $data_bind ?> type="<?= $type ?>" class="<?= $class ?>" id="<?= $id ?>"
-        name="<?= $name ?>" <?= $disabled ?> <?= $required ?>/>
+      <label for="<?= $id ?>" class="form-label <?= $label_size ?> d-none d-md-block"><?= _t($label) ?></label>
+      <input <?= $data_bind ?> type="<?= $type ?>" class="<?= $class ?> <?= $size ?>" id="<?= $id ?>"
+        name="<?= $name ?>" <?= $disabled ?> <?= $required ?> value="<?= $value ?>" />
     </div>
   <? endif ?>
 <?php });
@@ -61,7 +73,18 @@ Widget::register('select', function($p1) {
   if($size) $class[]="form-select-$size";
   $class = implode(' ', $class);
   $data_bind=[];
+  $select_options = '';
   if($options) {
+    if($array) {
+      $sel='';
+      $val = $bean[$name];
+      foreach($array as $i) {
+        if($sel=='' && $val==$i['code']) {
+          $sel = ' selected';
+        } else {$sel='';}
+        $select_options .= "<option$sel value='{$i['code']}'>{$i['name']}</option>";
+      }
+    }
     if(!$columns) {
       $columns = 'id,name';
     }
@@ -74,12 +97,24 @@ Widget::register('select', function($p1) {
   } else {
     $data_bind = "data-bind=\"value: $name\"";
   }
+  if($form_layout && $form_layout['horizontal']):
+    $label_w = $form_layout['label'] ?? 'sm-2';
+    $input_w = $form_layout['input'] ?? 'sm-10';
   ?>
-  <div class="col-<?= $col ?>">
-    <label for="<?= $id ?>" class="form-label d-none d-md-block"><?= _t($label) ?></label>
-    <select <?= $data_bind ?> class="<?= $class ?>" name="<?= $name ?>" id="<?= $id ?>"
-      <?= $disabled ?> <?= $required ?>></select>
-  </div>
+    <div class="row mb-md-3 g-2">
+      <label for="<?= $id ?>" class="col-<?= $label_w ?> col-form-label"><?= _t($label) ?></label>
+      <div class="col-<?= $input_w ?>">
+        <select <?= $data_bind ?> class="<?= $class ?>" name="<?= $name ?>" id="<?= $id ?>"
+          <?= $disabled ?> <?= $required ?>><?= $select_options ?></select>
+      </div>
+    </div>
+  <? else: ?>
+    <div class="col-<?= $col ?>">
+      <label for="<?= $id ?>" class="form-label d-none d-md-block"><?= _t($label) ?></label>
+      <select <?= $data_bind ?> class="<?= $class ?>" name="<?= $name ?>" id="<?= $id ?>"
+        <?= $disabled ?> <?= $required ?>><?= $select_options ?></select>
+    </div>
+  <? endif ?>
 <?php });
 
 Widget::register('select2', function($p1) {
@@ -120,9 +155,11 @@ Widget::register('datalist', function($p1) {
 Widget::register('fields', function($p1) {
   $form = $p1[0];
   $options = $p1[1] ?? [];
+  $bean = $p1[2] ?? [];
   foreach($form as $field => $opt){
     $type = $opt['type'];
     $opt['form_layout'] = $options;
+    $opt['bean'] = $bean;
     switch($type) {
       case 'textarea': W::text($field, $opt); break;
       case 'select': W::select($field, $opt); break;

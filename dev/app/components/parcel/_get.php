@@ -3,11 +3,11 @@
     <h1>Parcel GET</h1>
     <a href="/dashboard">Dashboard</a>
     <hr/>
-    <?= $parcel->name ?>
+    <?= hs($parcel->name) ?>
     <h2>Marcos</h2>
     <ul>
       <? foreach ($parcel->ownPlotList as $plot): ?>
-      <li><a href="/plot/<?= $plot->id ?>"><?= $plot->name ?></a></li>
+      <li><a href="/plot/<?= $plot->id ?>"><?= hs($plot->name) ?></a></li>
       <? endforeach; ?>
     </ul>
   </div>

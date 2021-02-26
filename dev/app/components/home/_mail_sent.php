@@ -5,7 +5,7 @@
     <form action="/recover" method="post">
       <div class="mb-3 text-center">
         <p>Gracias por usar AgrOS.</p>
-        <p><?= $message ?></p>
+        <p><?= hs($message) ?></p>
         <p>Esperamos verte pronto.</p>
       </div>
       <div class="mb-3 form-check p-0">

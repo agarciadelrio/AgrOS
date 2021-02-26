@@ -2,7 +2,7 @@
   <a href="/dashboard">Dashboard</a>
   <div id="exampleModal" class="glass rounded shadow p-3 my-3">
     <h1 class="d-flex justify-content-between">
-      <span data-bind="text: name"><?= $task->name ?></span>
+      <span data-bind="text: name"><?= hs($task->name) ?></span>
       <span data-bind="text: isDirty"></span>
       <small data-bind="text: date">2021-01-01</small>
     </h1>

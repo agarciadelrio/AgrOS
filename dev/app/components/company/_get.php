@@ -3,11 +3,11 @@
     <h1>Company GET</h1>
     <a href="/dashboard">Dashboard</a>
     <hr/>
-    <?= $company->name ?>
+    <?= hs($company->name) ?>
     <h2>Granjas</h2>  <i class="fa fa-cog"></i>
     <ul>
       <? foreach ($company->sharedFarmList as $farm): ?>
-      <li><a href="/farm/<?= $farm->id ?>"><?= $farm->name ?></a></li>
+      <li><a href="/farm/<?= $farm->id ?>"><?= hs($farm->name) ?></a></li>
       <? endforeach; ?>
     </ul>
     <div class="row">

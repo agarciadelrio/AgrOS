@@ -31,7 +31,7 @@ function getSiteUrl() {
  * @return [type]
  */
 function _t($msg) {
-  return $msg;
+  return TRANSLATIONS[$msg]??$msg;
 }
 
 function obj2dict($array, $keys) {
@@ -66,11 +66,23 @@ function list2array($list, $keys) {
 }
 
 /**
- * Pon el subject en UTF8
+ * Pon el subject en UTF8.
+ *
  * @param mixed $subject
  *
  * @return [type]
  */
 function subjectUtf8($subject) {
   return '=?UTF-8?B?'.base64_encode($subject).'?=';
+}
+
+/**
+ * Previene inyección de script.
+ *
+ * @param mixed $subject
+ *
+ * @return [type]
+ */
+function hs($text) {
+  return htmlspecialchars($text, ENT_COMPAT, 'UTF-8');
 }

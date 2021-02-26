@@ -27,8 +27,22 @@ define('APP_NAME', 'AgrOS');
 define('APP_VERSION', '1.3.0');
 define('SITE_URL', getSiteUrl());
 define('IMG_URL', SITE_URL . '/app/assets/img');
-define('APP_ROOT', __DIR__);
+define('APP_ROOT', dirname(__DIR__));
 define('APP_PATH', APP_ROOT . '/app');
 define('COMPONENTS_PATH', API_PATH . '/app/components');
 define('LANG','es');
-?>
+$json_file_name = APP_PATH . '/i18n/' . LANG .'.json';
+if(file_exists($json_file_name)) {
+  define('TRANSLATIONS',json_decode(file_get_contents($json_file_name),TRUE));
+} else {
+  define('TRANSLATIONS',[]);
+}
+
+$json_file_name = APP_PATH . '/assets/data/countries.json';
+if(file_exists($json_file_name)) {
+  define('COUNTRIES',json_decode(file_get_contents($json_file_name),TRUE));
+} else {
+  define('COUNTRIES',[
+    "name" => "España", "code" => "ES",
+  ]);
+}

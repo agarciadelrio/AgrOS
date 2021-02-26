@@ -1,11 +1,11 @@
 <section class="d-flex flex-column justify-content-center align-items-center h-100 bg-agros">
   <h1 style="margin-top: -50px;">AgrOS</h1>
   <div class="glass rounded shadow p-3 m-3" style="max-width: 500px">
-    <h2 class="mt-3 mb-5"><?= $title ?? 'ERROR'?></h2>
+    <h2 class="mt-3 mb-5"><?= hs($title ?? 'ERROR') ?></h2>
     <form action="/recover" method="post">
       <div class="mb-3 text-center">
         <p>Ops! Parece que algo ha salido mal.</p>
-        <p><?= $message ?></p>
+        <p><?= hs($message) ?></p>
         <p>Vuelve a intentarlo en otro momento o contacta con el
           <a href="mailto:admin@agros.jaira.com" target="_blank">administrador</a>.</p>
       </div>
