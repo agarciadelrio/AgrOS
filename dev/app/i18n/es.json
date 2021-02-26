@@ -1,0 +1,15 @@
+{
+  "city": "Ciudad",
+  "country_code": "Código país",
+  "email": "Correo-e",
+  "lastname1": "Primer Apellido",
+  "lastname2": "Segundo apellido",
+  "mobile": "Móvil",
+  "name": "Nombre",
+  "phone": "Tlf. fijo",
+  "profile_photo_url": "URL de foto de perfil",
+  "state": "Provincia",
+  "street": "Calle",
+  "street2": "Calle 2",
+  "zip": "C.P."
+}
