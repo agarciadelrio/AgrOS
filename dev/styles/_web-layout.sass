@@ -1,0 +1,104 @@
+html.minimal, body.minimal
+  width: 100vw
+  height: 100%
+  min-height: 100%
+body.minimal
+  background: linear-gradient(to top left, skyblue, rgba(255, 153, 150, 0), red), linear-gradient(to top right, gold, rgba(255, 153, 150, 0), magenta) rgba(255, 153, 150, 1)
+  background-attachment: fixed
+  .full-screen
+    height: 100%
+    min-height: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+    -webkit-filter: blur(0px)
+    -moz-filter: blur(0px)
+    -o-filter: blur(0px)
+    -ms-filter: blur(0px)
+    filter: blur(0px)
+    transform: scale(1)
+    animation: blur 1s ease
+    img
+      margin-top: -100px
+      border-radius: 50%
+  h1
+    font-size: 50px
+  h1, h2
+    text-align: center
+    color: rgba(255, 255, 255, 0.85)
+
+@keyframes blur
+  0%,70%
+    -webkit-filter: blur(100px)
+    -moz-filter: blur(100px)
+    -o-filter: blur(100px)
+    -ms-filter: blur(100px)
+    filter: blur(100px)
+    transform: scale(3)
+
+  100%
+    -webkit-filter: blur(0px)
+    -moz-filter: blur(0px)
+    -o-filter: blur(0px)
+    -ms-filter: blur(0px)
+    filter: blur(0px)
+    transform: scale(1)
+
+.home-form
+  position: relative
+  min-height: 100vh
+  z-index: 1
+  padding: 0!important
+  margin: 0!important
+  background: linear-gradient(to right top, #65dfc9, #6cdbeb)
+  h1
+    color: #426696
+    font-size: 3rem
+    font-weight: 600
+    opacity: 0.8
+  &::before
+    position: absolute
+    left: 0
+    top: 0
+    width: 100vw
+    height: 100vh
+    content: ''
+    padding: 0!important
+    //background-color: green
+    background-image: url('/app/assets/img/rect.svg.php')
+    background-repeat: no-repeat
+    background-position: left top
+    background-size: cover
+    overflow: hidden
+    z-index: 0
+  & > div
+    position: relative
+    z-index: 2
+  .form-register, .form-login
+    max-width: 350px
+    background-color: rgba(255, 255, 255, 0.65)
+    backdrop-filter: blur(20px)
+    box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212)
+  & > nav.navbar
+    background-color: rgba(255, 255, 255, 0.65)
+    backdrop-filter: blur(20px)
+    box-shadow: 0px 6px 20px rgba(122, 122, 122, 0.212)
+
+.bg-agros
+  position: relative
+  z-index: 0
+  &::before
+    position: absolute
+    content: ' '
+    border: 1px solid red
+    width: 100vw
+    height: 100vh
+    background-image: url(app/assets/img/agros-logo.svg)
+    background-repeat: no-repeat
+    background-position: center
+    background-attachment: fixed
+    background-size: contain
+    overflow: hidden
+    filter: blur(5px)
+    opacity: 50%
+    z-index: -1

@@ -1,0 +1,21 @@
+@include media-breakpoint-up(lg) {
+  .modal-lg,
+  .modal-xl,
+  .modal-xxl {
+    max-width: $modal-lg;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .modal-xl,
+  .modal-xxl {
+    max-width: $modal-xl;
+  }
+}
+
+@include media-breakpoint-up(xxl) {
+  .modal-xxl {
+    max-width: $modal-xxl;
+  }
+}
+

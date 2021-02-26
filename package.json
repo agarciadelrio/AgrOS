@@ -1,27 +1,30 @@
 {
-  "name": "sand-box-agros",
-  "version": "1.0.0",
+  "name": "agros",
+  "version": "1.3.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "mkmodel": "echo ${npm_config_name}; mkdir -p ./dev/app/${npm_config_name};",
-    "dev": "parcel watch dev/index.pug",
+    "sass": "sass --watch dev/styles.sass:dist/styles.css",
     "gulp": "gulp php",
-    "serve": "php -S agros.localhost:8080 -t dist"
+    "parcel": "parcel watch dev/index.ts",
+    "serve": "php -S 0.0.0.0:8080 -t dist -c php.ini",
+    "bs": "browser-sync -w -f dist http://agros.localhost:8080"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.2",
+    "@types/bootstrap": "^5.0.5",
     "@types/jquery": "^3.5.5",
-    "bootstrap": "^5.0.0-beta1",
+    "@types/select2": "^4.0.53",
+    "bootstrap": "^5.0.0-beta2",
     "gulp": "^4.0.2",
     "jquery": "^3.5.1",
-    "knockout": "^3.5.1",
-    "parcel-bundler": "^1.12.4",
-    "pug": "^3.0.0",
-    "sass": "^1.32.4",
-    "typescript": "^4.1.3"
+    "select2": "^4.1.0-rc.0",
+    "typescript": "^4.1.5"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.2",
+    "knockout": "^3.5.1"
   }
 }

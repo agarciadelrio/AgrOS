@@ -1,4 +1,9 @@
 {
+  "files.associations": {
+    "*.php.erb":"js.erb",
+    "*.pug.erb":"jade",
+    "*.ts.erb":"js.erb",
+  },
   "files.trimTrailingWhitespace": true,
   "files.exclude": {
     "**/.git": true,
