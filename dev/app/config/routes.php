@@ -2,6 +2,7 @@
 /*
  * Configuración de las rutas de la aplicación.
  */
+require 'routes-api-v1.php';
 Router::addRoutes([
   'GET' => [
     "/" => "HomeController::index",
@@ -19,12 +20,14 @@ Router::addRoutes([
     "/logout" => "HomeController::logout",
     "/parcel/:id" => "ParcelController::get",
     "/plot/:id" => "PlotController::get",
+    "/products" => "ProductController::index",
     "/profile" => "DashboardController::profile",
     "/recover" => "HomeController::recover",
     "/register" => "HomeController::register",
     "/resend-register" => "SessionController::resend_register",
     "/reset-password/:token" => "SessionController::reset_password",
     "/session-expired" => "HomeController::session_expired",
+    "/uoms" => "UomController::index",
     "/users" => "UserController::index",
     "/task/:id" => "TaskController::get",
   ],
@@ -37,5 +40,4 @@ Router::addRoutes([
     "/set-new-password" => "SessionController::set_new_password",
   ],
 ]);
-require 'routes-api-v1.php';
 require 'routes-test.php';

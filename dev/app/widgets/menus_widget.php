@@ -1,5 +1,19 @@
 <?php
-function isActive($route) { if(Router::$route == $route) return "active"; }
+/**
+ * @param mixed $route
+ *
+ * @return [type]
+ */
+function isActive($route) {
+  if(Router::$route == $route) return "active";
+}
+
+/**
+ * @param mixed $route
+ * @param mixed $icon=False
+ *
+ * @return [type]
+ */
 function menuItem($route, $icon=False) {
   if($icon) {
     return "<a class=\"nav-link " . isActive("/$route") . "\" href=\"/$route\">"
@@ -9,6 +23,7 @@ function menuItem($route, $icon=False) {
     return "<a class=\"nav-link " . isActive("/$route") . "\" href=\"/$route\">" . _t($route) . "</a>";
   }
 }
+
 Widget::register('main_menu', function($p1) {
 ?>
   <nav class="navbar navbar-agros navbar-expand-lg navbar-dark bg-dark">
@@ -75,4 +90,17 @@ Widget::register('main_menu', function($p1) {
     </div>
   </nav>
 
+<?php });
+
+Widget::register('category_menu', function($p1) {
+?>
+<nav class="nav flex-column navbar-dark bg-dark">
+  <a class="nav-link active" href="/categories">Categorías</a>
+  <a class="nav-link active" href="/uoms">UOMs</a>
+  <a class="nav-link" href="/products">Productos</a>
+  <?php /*
+  <a class="nav-link" href="#">Link</a>
+  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+  */ ?>
+</nav>
 <?php });

@@ -8,6 +8,11 @@
  * @access public
  */
 class FarmController extends Controller {
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
   public static function index($params=[]) {
     $user = Sessions::authenticate();
     $params['ses'] = json_encode($_SESSION);
@@ -15,6 +20,11 @@ class FarmController extends Controller {
     self::render('farm/_index', $params);
   }
 
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
   public static function get($params=[]) {
     $user = Sessions::authenticate();
     $params['ses'] = json_encode($_SESSION);

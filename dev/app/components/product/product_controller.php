@@ -1,9 +1,9 @@
 <?php
 
 /**
- * [Description ContactController]
+ * [Description ProductController]
  */
-class ContactController extends Controller {
+class ProductController extends Controller {
 
   /**
    * @param mixed $params=[]
@@ -12,6 +12,6 @@ class ContactController extends Controller {
    */
   public static function index($params=[]) {
     $user = Sessions::authenticate();
-    self::render('contact/_index', $params);
+    self::render('product/_index', $params);
   }
 }

@@ -8,6 +8,11 @@
  * @access public
  */
 class TaskController extends Controller {
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
   public static function get($params=[]) {
     $user = Sessions::authenticate();
     $task = R::load('task', $params['id']);
@@ -20,6 +25,11 @@ class TaskController extends Controller {
     self::render('task/_get', $params);
   }
 
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
   public static function get_task($params=[]) {
     $user = Sessions::authenticate();
     $id = intval($params['id']);

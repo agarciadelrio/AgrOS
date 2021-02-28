@@ -31,7 +31,7 @@ function getSiteUrl() {
  * @return [type]
  */
 function _t($msg) {
-  return TRANSLATIONS[$msg]??$msg;
+  return TRANSLATIONS[$msg]?? ucfirst(str_replace('_', ' ', $msg));
 }
 
 function obj2dict($array, $keys) {

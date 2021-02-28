@@ -8,6 +8,11 @@
  * @access public
  */
 class PlotController extends Controller {
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
   public static function get($params=[]) {
     $user = Sessions::authenticate();
     $params['ses'] = json_encode($_SESSION);
