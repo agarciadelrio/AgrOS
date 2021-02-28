@@ -110,3 +110,6 @@ tmp
 zzz*
 
 .sass-cache
+.phpdoc
+documentor
+sync.sh

@@ -1,0 +1,30 @@
+.calendar
+  .months
+    display: flex
+    gap: 1rem
+    flex-direction: column
+    &.horizontal
+      flex-direction: row
+    .month
+      flex: 1
+      //border: 1px solid red
+      max-width: 14rem
+      table
+        border-collapse: collapse
+        min-width: 14rem
+        width: 100%
+        th, td
+          //border: 1px solid red
+          text-align: center
+        td
+          cursor: pointer
+          &.weekend
+            color: #A00
+          &.outdate
+            color: #AAA
+            &.weekend
+              color: #A44
+          &.today
+            background-color: #AFA
+          &:hover
+            background-color: #FFA
