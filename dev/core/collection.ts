@@ -6,19 +6,58 @@ class Field {
   value
   type
   options
+  table_value
+  collection:Collection
+  fieldTemplate
+  link
+  linkOptions
   constructor(item,key,value) {
     this.item = item
+    this.collection = this.item.collection
     this.key = ko.observable(key)
     this.value = ko.observable(value)
     this.type = ko.pureComputed(() => {
       return this.item.collection.columns[this.key()].type || 'text'
     })
+    if(key.includes('_id')) {
+      [this.link] = key.split('_id')
+      if(!Collection.feeds[this.link]) {
+        Collection.feeds[this.link] = ko.observableArray([])
+        fetch(`/api/v1/options/${this.link}`)
+        .then(response => response.json())
+        .then(data => {
+          Collection.feeds[this.link](data.items)
+        })
+        .catch(err => console.error('OPTIONS ERROR: ', err))
+      }
+      this.linkOptions = Collection.feeds[this.link]
+      this.fieldTemplate = 'linkTemplate'
+      this.table_value = ko.pureComputed(() => {
+        for(let _i in this.linkOptions()) {
+          const i = this.linkOptions()[_i]
+          if(i.id == this.value()) return i.name
+        }
+        return ''
+      })
+    } else {
+      this.linkOptions = ko.observableArray([])
+      if(this.type()=='textarea') {
+        this.fieldTemplate = 'textTemplate'
+      } else {
+        this.fieldTemplate = 'inputTemplate'
+      }
+      this.link = null
+      this.table_value = ko.pureComputed(() => {
+        return this.value()
+      })
+    }
+
+
     this.options = ko.computed(() => {
       return this.item.collection.columns[this.key()]||{}
     })
   }
   tdClass() {
-    //{'text-end': item.columns()[name].options()}
     return this.options()['td']||null
   }
 }
@@ -50,6 +89,7 @@ class Item {
 export class Collection {
   static self = null
   static url: string = ''
+  static feeds = {}
   columns
   messages
   column_names
@@ -58,19 +98,16 @@ export class Collection {
   newItem
   selectedItem
   items
+  stuff
   constructor(url, options) {
     Collection.url = url
     Collection.self = this
     this.columns = options.columns
     this.messages = options.messages
     this.column_names = ko.observableArray(Object.keys(this.columns))
-    console.log('CREARE', Object.keys(this.columns))
-    console.log('FILTER', Object.keys(this.columns).filter(c => {
-      console.log('C',!this.columns[c].hide_col)
-      return true
-    } ))
     this.table_columns = ko.observableArray(Object.keys(this.columns).filter(c => !this.columns[c].hide_col ))
     this.state = ko.observable('new')
+    this.stuff = ko.observable({})
     this.newItem = ko.observable(new Item(this, {
       id: null,
       name: '',
@@ -96,12 +133,14 @@ export class Collection {
     fetch(Collection.url)
     .then(response => response.json())
     .then(data => {
+      //console.log('DATA LOADED', data)
       this.items(data.items.map(u => {
         return ko.observable(new Item(Collection.self, u))
       }))
+      this.stuff(data.stuff||{})
     })
     .catch(error => {
-      console.log('error', error)
+      console.error('error', error)
       Collection.showAlert(`ERROR: ${error}`, 'danger')
     })
   }
@@ -111,7 +150,7 @@ export class Collection {
   }
   static showAlert(msg, type='success') {
     var $a = $('#mainAlert')
-    console.log('showAlert', msg, $a)
+    //console.log('showAlert', msg, $a)
     $a.removeClass('alert-success alert-danger').addClass('alert-'+type)
     $a.find('.msg:first').html(msg)
     $a.fadeOut(() => {$a.fadeIn()})
@@ -150,7 +189,7 @@ export class Collection {
       }
     })
     .catch(error => {
-      console.log('ERROR', error)
+      console.error('ERROR', error)
       Collection.showAlert(`ERROR: ${error}`, 'danger')
     })
     return false
@@ -160,13 +199,11 @@ export class Collection {
     if(confirm(self.messages.are_you_sure)) {
       var id = self.newItem().columns().id.value()
       if(self.state()=='edit' && id) {
-        console.log('DELETE ME', id)
         var url = `${Collection.url}/${id}/delete`
         var options = {
           method: 'POST',
           body: JSON.stringify({id:id,action:'delete'})
         }
-        console.log('ITEMS POST', self.items())
         fetch(url,options)
         .then(response => response.json())
         .then(data => {
@@ -181,7 +218,7 @@ export class Collection {
           }
         })
         .catch(error => {
-          console.log('ERROR', error)
+          console.error('ERROR', error)
           Collection.showAlert(`ERROR: ${error}`, 'danger')
         })
       }

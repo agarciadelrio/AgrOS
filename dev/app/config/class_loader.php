@@ -1,11 +1,19 @@
 <?php
 
+/**
+ * Carga dinámica de clases
+ *
+ * @param mixed $name
+ *
+ * @return [type]
+ */
 function class_loader( $name ) {
   $classes = [
     // MODELOS
     'Profile' => COMPONENTS_PATH . '/dashboard/profile',
     'Task' => COMPONENTS_PATH . '/task/task',
     // CONTROLADORES
+    'ApiController' => COMPONENTS_PATH . '/api/api_controller',
     'CategoryController' => COMPONENTS_PATH . '/category/category_controller',
     'CompanyController' => COMPONENTS_PATH . '/company/company_controller',
     'ContactController' => COMPONENTS_PATH . '/contact/contact_controller',

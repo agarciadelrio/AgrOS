@@ -1,7 +1,12 @@
 <?php
 
 /**
- * [Description UomController]
+ * Unidades de medida.
+ *
+ * @package Controladores
+ * @author Antonio M. García del Río
+ * @version 0.1
+ * @access public
  */
 class UomController extends Controller {
   static $TABLE_NAME = 'uom';

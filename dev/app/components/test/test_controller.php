@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Controlador para hacer pruebas de desarrollo
+ *
+ * @package DEV
+ * @author Antonio M. García del Río
+ * @version 0.1
+ * @access public
+ */
 class TestController extends Controller {
   public static function _mail($params=[]) {
 

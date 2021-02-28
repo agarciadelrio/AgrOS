@@ -1,7 +1,12 @@
 <?php
 
 /**
- * [Description SessionController]
+ * Sesiones
+ *
+ * @package Controladores
+ * @author Antonio M. García del Río
+ * @version 0.1
+ * @access public
  */
 class SessionController extends Controller{
   static $layout = 'minimal';
@@ -39,6 +44,9 @@ class SessionController extends Controller{
         $_SESSION['user'] = [
           'id' => $user->id,
           'email' => $user->email,
+          'active' => $user->active,
+          'admin' => $user->admin,
+          'owner' => $user->owner,
         ];
         self::redirect('/dashboard',[
           'msg' => _t('User login successful'),

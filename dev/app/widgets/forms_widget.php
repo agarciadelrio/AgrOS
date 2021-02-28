@@ -1,4 +1,6 @@
 <?php
+/* REGISTRO DE WIDGETS */
+
 Widget::register('values', function($p1){
   list($field, $opt) = $p1[0];
   $class=['form-control'];

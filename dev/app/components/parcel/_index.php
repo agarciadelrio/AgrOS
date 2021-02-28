@@ -3,7 +3,7 @@
     <div class="d-none d-sm-block col-2 navbar-dark bg-dark" style="min-height:95vh;">
       <?= W::company_menu() ?>
     </div>
-    <div id="productModel" class="col-12 col-sm-10 p-3">
+    <div id="parcelModel" class="col-12 col-sm-10 p-3">
       <div class="glass rounded shadow p-3">
         <div class="d-flex justify-content-between m-0">
           <h1><i class="<?= W::fa('parcels') ?>"></i> <?= _t('parcels') ?></h1>
@@ -21,16 +21,16 @@
         </div>
         <hr class="m-0 mb-3"/>
         <div class="row">
-          <div id="productTable" class="col-6">
+          <div id="parcelTable" class="col-6">
             <!-- TABLA -->
             <table class="table table-sm table-striped table-hover">
               <thead>
-                <tr data-bind="foreach: column_names">
+                <tr data-bind="foreach: table_columns">
                   <th data-bind="text: $data"></th>
                 </tr>
               </thead>
               <tbody data-bind="foreach: {data: items, as: 'item'} ">
-                <tr data-bind="foreach: {data: column_names, as: 'name'}">
+                <tr data-bind="foreach: {data: $parent.table_columns, as: 'name'}">
                   <td data-bind="
                     click: item.select.bind(item),
                     class: item.columns()[name].tdClass(),
@@ -43,10 +43,10 @@
             </table>
           </div>
           <div class="col-6">
-            <div data-bind="with: newItem" id="productForm"
+            <div data-bind="with: newItem" id="parcelForm"
               class="form-wrapper bg-dark text-light rounded p-3 shadow sticky-top">
-              <h2 data-bind="visible: 'new'==collection.state()" class="pb-1">Crear Nueva Producto</h2>
-              <h2 data-bind="visible: 'edit'==collection.state()" class="pb-1">Modificar Producto</h2>
+              <h2 data-bind="visible: 'new'==collection.state()" class="pb-1">Crear Nueva Parcela</h2>
+              <h2 data-bind="visible: 'edit'==collection.state()" class="pb-1">Modificar Parcela</h2>
               <!-- FORMULARIO -->
               <form data-bind="submit: Collection.dataSave" action="#" method="post">
                 <div data-bind="foreach: {data: column_names, as: 'cn'}">
@@ -90,16 +90,13 @@
   const PRODUCT_COLUMNS  = {
     id:{type: 'hidden'},
     name:{required:1},
-    category_id:{required:1},
-    uom_id:{required:1},
-    price:{type:'number', step:'any', required:1, td: 'text-end'},
   }
 
   const PRODUCT_MESSAGES = {
-    create: 'Nuevo Producto creado correctamente',
-    update: 'Producto modificado correctamente',
-    delete: 'Producto eliminado correctamente',
-    are_you_sure: '¿Quieres continuar para eliminar este Producto?',
+    create: 'Nueva Parcela creada correctamente',
+    update: 'Parcela modificada correctamente',
+    delete: 'Parcela eliminada correctamente',
+    are_you_sure: '¿Quieres continuar para eliminar esta Parcela?',
   }
 
   var collection = new Collection('/api/v1/parcels',{
@@ -107,7 +104,7 @@
     messages: PRODUCT_MESSAGES,
   });
   $(function() {
-    ko.applyBindings(collection, document.getElementById('productModel'))
+    ko.applyBindings(collection, document.getElementById('parcelModel'))
   })
 }).call(this)
 </script>

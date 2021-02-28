@@ -57,12 +57,12 @@
         <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                     <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/Default.html"><abbr title="\Default">Default</abbr></a></h3>
                                 <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/Controladores.html"><abbr title="\Controladores">Controladores</abbr></a></h3>
-                                <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/Modelos.html"><abbr title="\Modelos">Modelos</abbr></a></h3>
+                                <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/DEV.html"><abbr title="\DEV">DEV</abbr></a></h3>
                                 <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/AgrOS.html"><abbr title="\AgrOS">AgrOS</abbr></a></h3>
                         <ul class="phpdocumentor-list">
+                                    <li><a href="packages/AgrOS-Lib.html"><abbr title="\AgrOS\Lib">Lib</abbr></a></li>
                                     <li><a href="packages/AgrOS-Functions.html"><abbr title="\AgrOS\Functions">Functions</abbr></a></li>
                                     <li><a href="packages/AgrOS-Helpers.html"><abbr title="\AgrOS\Helpers">Helpers</abbr></a></li>
-                                    <li><a href="packages/AgrOS-Lib.html"><abbr title="\AgrOS\Lib">Lib</abbr></a></li>
                             </ul>
                         </section>
     
@@ -102,9 +102,9 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="www/index.php"><a href="files/www-index.html"><abbr title="www/index.php">index.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="dist/lib/model.php"><a href="files/dist-lib-model.html"><abbr title="dist/lib/model.php">model.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">271</span>
+    <span class="phpdocumentor-element-found-in__line">11</span>
 </aside>
 
             <p class="phpdocumentor-summary">Model es la clase base para los modelos de datos</p>
@@ -174,11 +174,18 @@
 <dd>Campos del modelo.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Model.html#property_form">$form</a>
+    <span>
+                &nbsp;: array&lt;string|int, mixed&gt;            </span>
+</dt>
+<dd>Layout para formularios</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Model.html#property_required">$required</a>
     <span>
                 &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
-<dd>Campos requeridos</dd>
+<dd>Campos requeridos.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/Model.html#property_validate">$validate</a>
@@ -220,9 +227,9 @@
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="www/index.php"><a href="files/www-index.html"><abbr title="www/index.php">index.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="dist/lib/model.php"><a href="files/dist-lib-model.html"><abbr title="dist/lib/model.php">model.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">277</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 </aside>
 
         <p class="phpdocumentor-summary">Campos del modelo.</p>
@@ -245,6 +252,38 @@
             -public
             -static                                            "
 >
+    <h4 class="phpdocumentor-element__name" id="property_form">
+        $form
+        <a href="classes/Model.html#property_form" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="dist/lib/model.php"><a href="files/dist-lib-model.html"><abbr title="dist/lib/model.php">model.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">39</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Layout para formularios</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$form</span>
+     = <span class="phpdocumentor-signature__default-value">[&#039;name&#039; =&gt; [&#039;col&#039; =&gt; &#039;md-12&#039;, &#039;type&#039; =&gt; &#039;string&#039;, &#039;size&#039; =&gt; &#039;sm&#039;]]</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+            -static                                            "
+>
     <h4 class="phpdocumentor-element__name" id="property_required">
         $required
         <a href="classes/Model.html#property_required" class="headerlink"><i class="fas fa-link"></i></a>
@@ -252,12 +291,12 @@
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="www/index.php"><a href="files/www-index.html"><abbr title="www/index.php">index.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="dist/lib/model.php"><a href="files/dist-lib-model.html"><abbr title="dist/lib/model.php">model.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">291</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 </aside>
 
-        <p class="phpdocumentor-summary">Campos requeridos</p>
+        <p class="phpdocumentor-summary">Campos requeridos.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -284,9 +323,9 @@
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="www/index.php"><a href="files/www-index.html"><abbr title="www/index.php">index.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="dist/lib/model.php"><a href="files/dist-lib-model.html"><abbr title="dist/lib/model.php">model.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">284</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 </aside>
 
         <p class="phpdocumentor-summary">Validación de los campos.</p>
@@ -320,9 +359,9 @@
         <a href="classes/Model.html#method_validation" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="www/index.php"><a href="files/www-index.html"><abbr title="www/index.php">index.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="dist/lib/model.php"><a href="files/dist-lib-model.html"><abbr title="dist/lib/model.php">model.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">298</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 </aside>
 
         <p class="phpdocumentor-summary">Valida los valores de los campos</p>

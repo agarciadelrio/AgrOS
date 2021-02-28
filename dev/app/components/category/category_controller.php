@@ -1,7 +1,12 @@
 <?php
 
 /**
- * [Description CategoryController]
+ * Clase para gestionar las Categorías
+ *
+  * @package Controladores
+ * @author Antonio M. García del Río
+ * @version 0.1
+ * @access public
  */
 class CategoryController extends Controller {
 
@@ -61,7 +66,6 @@ class CategoryController extends Controller {
    * @return [type]
    */
   public static function index($params=[]) {
-    $user = Sessions::authenticate();
     $user = Sessions::authenticate();
     $category = R::findOne('category','category_id is NULL');
     $category_tree = [];

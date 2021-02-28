@@ -25,12 +25,12 @@
             <!-- TABLA -->
             <table class="table table-sm table-striped table-hover">
               <thead>
-                <tr data-bind="foreach: column_names">
+                <tr data-bind="foreach: table_columns">
                   <th data-bind="text: $data"></th>
                 </tr>
               </thead>
               <tbody data-bind="foreach: {data: items, as: 'item'} ">
-                <tr data-bind="foreach: {data: column_names, as: 'name'}">
+                <tr data-bind="foreach: {data: $parent.table_columns, as: 'name'}">
                   <td data-bind="
                     click: item.select.bind(item),
                     class: item.columns()[name].tdClass(),

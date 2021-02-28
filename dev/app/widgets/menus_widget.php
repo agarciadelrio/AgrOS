@@ -16,7 +16,7 @@ function isActive($route, $class='active') {
  */
 function menuItem($route, $icon=False, $extraclass='', $active='active') {
   if($icon) {
-    return "<a class=\"nav-link $extraclass " . isActive("/$route",$active) . "\" href=\"/$route\">"
+    return "<a class=\"text-nowrap nav-link $extraclass " . isActive("/$route",$active) . "\" href=\"/$route\">"
       . '<i class="' . W::fa($icon) . '"></i> '
       . _t($route) . "</a>";
   } else {
@@ -41,17 +41,25 @@ Widget::register('main_menu', function($p1) {
             <?= menuItem('dashboard') ?>
           </li>
           <li class="nav-item">
-            <?= menuItem('companies') ?>
+            <?php if($_SESSION['user'] && ($_SESSION['user']['admin']||$_SESSION['user']['owner'])): ?>
+              <?= menuItem('companies') ?>
+            <? else: ?>
+              <?= menuItem('plots') ?>
+            <?php endif ?>
           </li>
+          <?php if($_SESSION['user'] && ($_SESSION['user']['admin']||$_SESSION['user']['owner'])): ?>
           <li class="nav-item">
             <?= menuItem('categories') ?>
           </li>
+          <?php endif ?>
           <li class="nav-item">
             <?= menuItem('contacts') ?>
           </li>
+          <?php if($_SESSION['user'] && $_SESSION['user']['admin']): ?>
           <li class="nav-item">
             <?= menuItem('users') ?>
           </li>
+          <?php endif ?>
           <?php /*
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -107,9 +115,11 @@ Widget::register('company_menu', function($p1) {
   ?>
   <div class="sticky-top">
     <nav class="nav flex-column navbar-dark bg-dark">
+      <? if($_SESSION['user'] && ($_SESSION['user']['admin']||$_SESSION['user']['owner'])): ?>
       <?= menuItem('companies', 'companies', 'link-secondary', 'link-light') ?>
       <?= menuItem('farms', 'farms', 'link-secondary', 'link-light') ?>
       <?= menuItem('parcels', 'parcels', 'link-secondary', 'link-light') ?>
+      <? endif ?>
       <?= menuItem('plots', 'plots', 'link-secondary', 'link-light') ?>
       <?= menuItem('tasks', 'tasks', 'link-secondary', 'link-light') ?>
     </nav>

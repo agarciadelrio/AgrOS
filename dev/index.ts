@@ -1,6 +1,4 @@
 import $ from 'jquery'
-
-//import S2 from 'select2/dist/js/select2.js'
 window.$ = $
 window.jQuery = $
 import select2 from 'select2/dist/js/select2.js'
@@ -12,7 +10,7 @@ import { DataTable } from './core/data-table'
 import { Task } from './core/task'
 import { JQueryEventHandlerBase } from 'select2'
 import { Collection } from './core/collection'
-//import * as select2 from 'select2'
+import { Calendar } from './core/calendar/calendar'
 
 declare global {
   interface Window {
@@ -23,6 +21,7 @@ declare global {
     select2: typeof select2
     Task: typeof Task
     Collection: typeof Collection
+    App: typeof App
   }
   interface SelectOptions {
     id: number|string
@@ -83,8 +82,8 @@ ko.extenders.required = function(target, overrideMessage) {
 
   //define a function to do validation
   function validate(newValue) {
-     target.hasError(newValue ? false : true);
-     target.validationMessage(newValue ? "" : overrideMessage || "This field is required");
+    target.hasError(newValue ? false : true);
+    target.validationMessage(newValue ? "" : overrideMessage || "This field is required");
   }
 
   //initial validation
@@ -97,23 +96,37 @@ ko.extenders.required = function(target, overrideMessage) {
   return target;
 };
 
+function todayDate() {
+  let d = new Date()
+  d.setHours(0,0,0,0)
+  return d
+}
 
-//window.S2 = S2
+export class App {
+  name: ko.Observable<string>
+  calendar: ko.Observable<Calendar>
+  static today = todayDate()
+  constructor() {
+    this.name = ko.observable('HELLO')
+    this.calendar = ko.observable(new Calendar({
+      init_month: 3,
+      init_year: 2021,
+      months_counter: 3,
+      name: 'Mi calendario'
+    }))
+  }
+}
+
+window.App = App
 window.bootstrap = bootstrap
 window.ko = ko
 window.Task = Task
 window.Collection = Collection
 
-
-//import * as Select2 from 'select2'
-//window.Select2 = <any>Select2
-
 console.log('AgrOS')
-
 const api_url = '/api/v1'
 
 $(function(){
-  //$('body').hide()
   const $tbls = [
     $('#companyFarmTable'),
     $('#userTaskTable'),

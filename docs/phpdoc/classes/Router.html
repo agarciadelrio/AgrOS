@@ -57,12 +57,12 @@
         <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                     <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/Default.html"><abbr title="\Default">Default</abbr></a></h3>
                                 <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/Controladores.html"><abbr title="\Controladores">Controladores</abbr></a></h3>
-                                <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/Modelos.html"><abbr title="\Modelos">Modelos</abbr></a></h3>
+                                <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/DEV.html"><abbr title="\DEV">DEV</abbr></a></h3>
                                 <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/AgrOS.html"><abbr title="\AgrOS">AgrOS</abbr></a></h3>
                         <ul class="phpdocumentor-list">
+                                    <li><a href="packages/AgrOS-Lib.html"><abbr title="\AgrOS\Lib">Lib</abbr></a></li>
                                     <li><a href="packages/AgrOS-Functions.html"><abbr title="\AgrOS\Functions">Functions</abbr></a></li>
                                     <li><a href="packages/AgrOS-Helpers.html"><abbr title="\AgrOS\Helpers">Helpers</abbr></a></li>
-                                    <li><a href="packages/AgrOS-Lib.html"><abbr title="\AgrOS\Lib">Lib</abbr></a></li>
                             </ul>
                         </section>
     
@@ -102,9 +102,9 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="www/index.php"><a href="files/www-index.html"><abbr title="www/index.php">index.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="dist/lib/router.php"><a href="files/dist-lib-router.html"><abbr title="dist/lib/router.php">router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">426</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 </aside>
 
             <p class="phpdocumentor-summary">La clase Router es la encargada de procesar el URI para
@@ -159,7 +159,28 @@ determinar qué acción ejecutar.</p>
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -method -public">
+                <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Router.html#property_route">$route</a>
+    <span>
+                &nbsp;: string            </span>
+</dt>
+<dd>Valor que almacena la ruta seleccionada.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Router.html#property_ROUTES">$ROUTES</a>
+    <span>
+                &nbsp;: array&lt;string|int, mixed&gt;            </span>
+</dt>
+<dd>Almacena las rutas.</dd>
+
+                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Router.html#method_addRoutes">addRoutes()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Router.html#method_run">run()</a>
     <span>
                         &nbsp;: string|void    </span>
@@ -173,6 +194,76 @@ determinar qué acción ejecutar.</p>
         
 
         
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/Router.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+            -static                                            "
+>
+    <h4 class="phpdocumentor-element__name" id="property_route">
+        $route
+        <a href="classes/Router.html#property_route" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="dist/lib/router.php"><a href="files/dist-lib-router.html"><abbr title="dist/lib/router.php">router.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">35</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Valor que almacena la ruta seleccionada.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$route</span>
+    </code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+            -static                                            "
+>
+    <h4 class="phpdocumentor-element__name" id="property_ROUTES">
+        $ROUTES
+        <a href="classes/Router.html#property_ROUTES" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="dist/lib/router.php"><a href="files/dist-lib-router.html"><abbr title="dist/lib/router.php">router.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">25</span>
+</aside>
+
+        <p class="phpdocumentor-summary">Almacena las rutas.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$ROUTES</span>
+     = <span class="phpdocumentor-signature__default-value">[&#039;GET&#039; =&gt; [], &#039;POST&#039; =&gt; []]</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+            </section>
 
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
@@ -185,14 +276,56 @@ determinar qué acción ejecutar.</p>
             -public
                                     -static                    "
 >
+    <h4 class="phpdocumentor-element__name" id="method_addRoutes">
+        addRoutes()
+        <a href="classes/Router.html#method_addRoutes" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="dist/lib/router.php"><a href="files/dist-lib-router.html"><abbr title="dist/lib/router.php">router.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">37</span>
+</aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">addRoutes</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routes</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$routes</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+            <section class="phpdocumentor-description"></section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
     <h4 class="phpdocumentor-element__name" id="method_run">
         run()
         <a href="classes/Router.html#method_run" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="www/index.php"><a href="files/www-index.html"><abbr title="www/index.php">index.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="dist/lib/router.php"><a href="files/dist-lib-router.html"><abbr title="dist/lib/router.php">router.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">437</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 </aside>
 
         <p class="phpdocumentor-summary">Ejecuta una ruta.</p>

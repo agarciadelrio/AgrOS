@@ -1,7 +1,12 @@
 <?php
 
 /**
- * [Description ProductController]
+ * Productos
+ *
+ * @package Controladores
+ * @author Antonio M. García del Río
+ * @version 0.1
+ * @access public
  */
 class ProductController extends Controller {
   static $TABLE_NAME = 'product';

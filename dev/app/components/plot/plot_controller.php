@@ -1,6 +1,6 @@
 <?php
 /**
- * Controlador para el panel de control del usuario.
+ * Controlador para Marcos de plantación.
  *
  * @package Controladores
  * @author Antonio M. García del Río

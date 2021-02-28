@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "doc": "./documentor -t docs/phpdoc -d dist",
     "sass": "sass --watch dev/styles.sass:dist/styles.css",
     "gulp": "gulp php",
     "parcel": "parcel watch dev/index.ts",
+    "buildts": "parcel build dev/index.ts",
     "serve": "php -S 0.0.0.0:8080 -t dist -c php.ini",
     "bs": "browser-sync -w -f dist http://agros.localhost:8080"
   },

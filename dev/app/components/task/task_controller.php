@@ -1,6 +1,6 @@
 <?php
 /**
- * Controlador para el panel de control del usuario.
+ * Controlador para Tareas.
  *
  * @package Controladores
  * @author Antonio M. García del Río
@@ -9,7 +9,25 @@
  */
 class TaskController extends Controller {
   static $TABLE_NAME = 'task';
-  static $TABLE_COLUMNS = ['name'];
+  static $TABLE_COLUMNS = [
+    'date',
+    'time',
+    'name',
+    'contact_id',
+    'member_id',
+    'team_id',
+    'company_id',
+    'farm_id',
+    'parcel_id',
+    'plot_id',
+    'category_id',
+    'product_id',
+    'uom_id',
+    'quantity',
+    'price',
+    'description',
+    'notes',
+];
 
   /**
    * @param mixed $params=[]
