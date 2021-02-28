@@ -11,6 +11,7 @@ import * as bootstrap from 'bootstrap'
 import { DataTable } from './core/data-table'
 import { Task } from './core/task'
 import { JQueryEventHandlerBase } from 'select2'
+import { Collection } from './core/collection'
 //import * as select2 from 'select2'
 
 declare global {
@@ -21,6 +22,7 @@ declare global {
     bootstrap: typeof bootstrap
     select2: typeof select2
     Task: typeof Task
+    Collection: typeof Collection
   }
   interface SelectOptions {
     id: number|string
@@ -100,6 +102,7 @@ ko.extenders.required = function(target, overrideMessage) {
 window.bootstrap = bootstrap
 window.ko = ko
 window.Task = Task
+window.Collection = Collection
 
 
 //import * as Select2 from 'select2'

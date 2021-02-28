@@ -18,35 +18,41 @@
                   </div>
                 </td>
                 <td class="w-50">
-                  <div data-bind="visible: !selectedCategory()">
-                    <h2><i class="fa fa-edit"></i> Seleccione una Categoría</h2>
-                  </div>
-                  <div data-bind="if: selectedCategory()">
-                    <div data-bind="with: selectedCategory" class="form-wrapper bg-dark text-light rounded p-3 shadow">
-                      <h2><i class="fa fa-edit"></i> <span data-bind="text: name">Categoría</span></h2>
-                      <form data-bind="submit: submitData" id="formCategory" action="#" method="post">
-                        <input data-bind="value: id" type="hidden" id="categoryId" readonly disabled>
-                        <div class="mb-3">
-                          <label for="categoryName" class="form-label"><?= _t('name') ?></label>
-                          <input data-bind="value: name" type="text" class="form-control" id="categoryName">
-                        </div>
-                        <div data-bind="visible: parent" class="mb-3">
-                          <label for="categoryParent" class="form-label"><?= _t('parent_category') ?></label>
-                          <select data-bind="
-                            options: tree.options_list,
-                            optionsText: 'text',
-                            optionsValue: 'id',
-                            value: category_id"
-                            class="form-select" id="categoryParent">
-                          </select>
-                        </div>
-                        <div class="mb-3 text-end">
-                          <span data-bind="visible: parent">
-                            <button data-bind="click: deleteMe" class="btn btn-danger"><?= _t('delete') ?></button>
-                          </span>
-                          <button class="btn btn-primary"><?= _t('update') ?></button>
-                        </div>
-                      </form>
+                  <?php /*
+                  */ ?>
+                  <?php /* <div data-bind="if: selectedCategory()"> */ ?>
+                  <div class="sticky-top pt-3">
+                    <div class="form-wrapper bg-dark text-light rounded p-3 shadow">
+                      <div data-bind="visible: !selectedCategory()">
+                        <h2><i class="fa fa-edit"></i> Seleccione una Categoría</h2>
+                      </div>
+                      <div data-bind="with: selectedCategory">
+                        <h2><i class="fa fa-edit"></i> <span data-bind="text: name">Categoría</span></h2>
+                        <!-- FORMULARIO -->
+                        <form data-bind="submit: submitData" id="formCategory" action="#" method="post">
+                          <input data-bind="value: id" type="hidden" id="categoryId" readonly disabled>
+                          <div class="mb-3">
+                            <label for="categoryName" class="form-label"><?= _t('name') ?></label>
+                            <input data-bind="value: name" type="text" class="form-control" id="categoryName">
+                          </div>
+                          <div data-bind="visible: parent" class="mb-3">
+                            <label for="categoryParent" class="form-label"><?= _t('parent_category') ?></label>
+                            <select data-bind="
+                              options: tree.options_list,
+                              optionsText: 'text',
+                              optionsValue: 'id',
+                              value: category_id"
+                              class="form-select" id="categoryParent">
+                            </select>
+                          </div>
+                          <div class="mb-3 text-end">
+                            <span data-bind="visible: parent">
+                              <button data-bind="click: deleteMe" class="btn btn-danger"><?= _t('delete') ?></button>
+                            </span>
+                            <button class="btn btn-primary"><?= _t('update') ?></button>
+                          </div>
+                        </form>
+                      </div>
                     </div>
                   </div>
                 </td>

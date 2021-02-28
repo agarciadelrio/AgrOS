@@ -1,140 +1,3 @@
-<script>
-class Field {
-  constructor(item,key,value) {
-    this.item = item
-    this.key = ko.observable(key)
-    this.value = ko.observable(value)
-    this.type = ko.pureComputed(() => {
-      return this.item.collection.columns[this.key()].type || 'text'
-    })
-    this.options = ko.computed(() => {
-      return this.item.collection.columns[this.key()]||{}
-    })
-  }
-}
-class Item {
-  constructor(collection, values={}) {
-    this.collection = collection
-    this.column_names = this.collection.column_names
-    this.columns = ko.observable({})
-    this.fields = ko.observableArray([])
-    this.column_names().forEach(column_name => {
-      var field = new Field(this, column_name, values[column_name]||null)
-      this.columns()[column_name] = field
-      this.fields.push(field)
-    })
-  }
-  select() {
-    console.log('CLICK SELECT', this)
-    Collection.self.newItem(this)
-    Collection.self.state('edit')
-  }
-}
-class Collection {
-  static self = null
-  constructor(columns) {
-    Collection.self = this
-    this.columns = columns
-    this.column_names = ko.observableArray(Object.keys(columns))
-    this.state = ko.observable('new')
-    this.newItem = ko.observable(new Item(this, {
-      id: null,
-      name: '',
-      symbol: '',
-      abbr: '',
-      factor:1,
-    }))
-    console.log('newItem', ko.toJS(this.newItem()))
-    this.selectedItem = ko.observable({})
-    this.items = ko.observableArray([])
-    this.load()
-  }
-  setNew() {
-    this.newItem(new Item(this, {
-      id: null,
-      name: '',
-      symbol: '',
-      abbr: '',
-      factor:1,
-    }))
-    this.state('new')
-  }
-  load() {
-    fetch('/api/v1/uoms')
-    .then(response => response.json())
-    .then(data => {
-      console.log('data', data)
-      //console.log(data.uoms.map(u => {
-      //  return ko.observable(new Item(Collection.self, u))
-      //}))
-      this.items(data.uoms.map(u => {
-        return ko.observable(new Item(Collection.self, u))
-      }))
-    })
-    .catch(error => {
-      console.log('error', error)
-    })
-  }
-  static dataSave() {
-    console.log('DATA SAVE')
-    Collection.save()
-    return false
-  }
-  static save() {
-    var self = Collection.self
-    var items = self.items
-    console.log('SAVE', self.newItem().fields().map(i => i.value()))
-    var data = {}
-    self.newItem().fields().forEach(i => {
-      data[i.key()] = i.value()
-    })
-    console.log('items', data)
-    var url = '/api/v1/uoms'
-    var options = {
-      method: 'POST',
-      body: JSON.stringify(data)
-    }
-    console.log('STATE', self.state(), self.newItem().columns().id.value())
-    if(self.state()=='edit'&&self.newItem().columns().id.value()) {
-      url = '/api/v1/uoms/' + self.newItem().columns().id.value()
-    }
-    fetch(url,options)
-    .then(response => response.json())
-    .then(data => {
-      console.log('DATA', data)
-      if(self.state()=='new') {
-        items.push(ko.observable(new Item(self, data.uom)))
-      }
-    })
-    .catch(error => {
-      console.log('ERROR', error)
-    })
-    return false
-  }
-  static deleteMe() {
-    return false
-  }
-}
-</script>
-<script>
-(function() {
-
-  const UOM_COLUMNS  = {
-    id:{type: 'hidden'},
-    name:{required:1},
-    factor:{type:'number',required:1, step:"any"},
-    symbol:{required:1},
-    abbr:{}
-  }
-
-  console.log('UOM', UOM_COLUMNS)
-  var collection = new Collection(UOM_COLUMNS);
-  $(function() {
-    ko.applyBindings(collection, document.getElementById('uomModel'))
-    console.log('collection',ko.toJS(collection))
-  })
-}).call(this)
-</script>
 <section class="container-fluid p-0">
   <div class="d-flex align-items-stretch">
     <div class="d-none d-sm-block col-2 navbar-dark bg-dark" style="min-height:95vh;">
@@ -142,13 +5,21 @@ class Collection {
     </div>
     <div id="uomModel" class="col-12 col-sm-10 p-3">
       <div class="glass rounded shadow p-3">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between m-0">
           <h1><i class="<?= W::fa('uoms') ?>"></i> <?= _t('uoms') ?></h1>
-          <span data-bind="visible: 'edit'==state()">
-            <button data-bind="click: setNew" class="btn btn-success"><i class="fa fa-plus"></i> NUEVA</button>
-          </span>
+          <div>
+            <div id="mainAlert" class="alert alert-dismissible" style="display:none" role="alert">
+              <div class="msg">MSG</div>
+              <button data-bind="click: Collection.closeAlert" type="button" class="btn-close"></button>
+            </div>
+          </div>
+          <div>
+            <span data-bind="visible: 'edit'==state()">
+              <button data-bind="click: setNew" class="btn btn-success"><i class="fa fa-plus"></i> NUEVA</button>
+            </span>
+          </div>
         </div>
-        <hr/>
+        <hr class="m-0 mb-3"/>
         <div class="row">
           <div id="uomTable" class="col-6">
             <!-- TABLA -->
@@ -170,7 +41,7 @@ class Collection {
           </div>
           <div class="col-6">
             <div data-bind="with: newItem" id="uomForm"
-              class="form-wrapper bg-dark text-light rounded p-3 shadow">
+              class="form-wrapper bg-dark text-light rounded p-3 shadow sticky-top">
               <h2 data-bind="visible: 'new'==collection.state()" class="pb-1">Crear Nueva UDM</h2>
               <h2 data-bind="visible: 'edit'==collection.state()" class="pb-1">Modificar UDM</h2>
               <!-- FORMULARIO -->
@@ -209,3 +80,31 @@ class Collection {
     </div>
   </div>
 </section>
+
+<script>
+(function() {
+
+  const UOM_COLUMNS  = {
+    id:{type: 'hidden'},
+    name:{required:1},
+    factor:{type:'number',required:1, step:"any"},
+    symbol:{required:1},
+    abbr:{}
+  }
+
+  const UOM_MESSAGES = {
+    create: 'Nueva UDM creada correctamente',
+    update: 'UDM modificada correctamente',
+    delete: 'UDM eliminada correctamente',
+    are_you_sure: '¿Quieres continuar para eliminar esta UDM?',
+  }
+
+  var collection = new Collection('/api/v1/uoms',{
+    columns: UOM_COLUMNS,
+    messages: UOM_MESSAGES,
+  });
+  $(function() {
+    ko.applyBindings(collection, document.getElementById('uomModel'))
+  })
+}).call(this)
+</script>

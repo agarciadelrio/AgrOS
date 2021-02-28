@@ -100,6 +100,92 @@ class Controller {
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
     return mail($to, $subject, $body, $headers);
   }
+
+  /******** MÉTODOS CRUD BASE ********/
+
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
+  public static function load($params=[]) {
+    $user = Sessions::authenticate();
+    $items = array_values(R::find(static::$TABLE_NAME));
+    self::json([
+      'msg' => 'load',
+      'items' => $items,
+    ]);
+  }
+
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
+  public static function create($params=[]) {
+    $user = Sessions::authenticate();
+    $json = file_get_contents('php://input');
+    $item_data = json_decode($json);
+    $item = R::dispense(static::$TABLE_NAME);
+    $columns = static::$TABLE_COLUMNS;
+    if (($key = array_search('id', $columns)) !== false) {
+      unset($columns[$key]);
+    }
+    $item->import($item_data, $columns);
+    $item->user = $user;
+    R::store($item);
+    self::json([
+      'msg' => strtoupper(static::$TABLE_NAME) . ' CREADO',
+      'item' => $item,
+      'item_data' => $item_data,
+    ]);
+  }
+
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
+  public static function update($params=[]) {
+    $user = Sessions::authenticate();
+    $json = file_get_contents('php://input');
+    $item_data = json_decode($json);
+    $item = R::load(static::$TABLE_NAME, $params['id']);
+    if($item) {
+      $columns = static::$TABLE_COLUMNS;
+      if (($key = array_search('id', $columns)) !== false) {
+        unset($columns[$key]);
+      }
+      $item->import($item_data, $columns);
+      $item->user = $user;
+      R::store($item);
+      self::json([
+        'msg' => strtoupper(static::$TABLE_NAME) . ' ACTUALIZADO',
+        'item' => $item,
+        'item_data' => $item_data,
+      ]);
+    } else throw new Exception(strtoupper(static::$TABLE_NAME) . " {$params['id']} NO ENCONTRADO.");
+  }
+
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
+  public static function delete($params=[]) {
+    $user = Sessions::authenticate();
+    $json = file_get_contents('php://input');
+    $item_data = json_decode($json);
+    $item = R::load(static::$TABLE_NAME, $params['id']);
+    if($item_data->id == $params['id'] &&  $item_data->action == 'delete') {
+      R::trash( $item );
+    }
+    self::json([
+      'msg' => strtoupper(static::$TABLE_NAME) . ' ELIMINADO',
+      'item_data' => $item_data,
+    ]);
+  }
+
 }
 
 ?>

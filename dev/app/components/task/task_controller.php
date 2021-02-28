@@ -8,6 +8,19 @@
  * @access public
  */
 class TaskController extends Controller {
+  static $TABLE_NAME = 'task';
+  static $TABLE_COLUMNS = ['name'];
+
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
+  public static function index($params=[]) {
+    $user = Sessions::authenticate();
+    self::render('task/_index', $params);
+  }
+
   /**
    * @param mixed $params=[]
    *

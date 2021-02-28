@@ -4,8 +4,8 @@
  *
  * @return [type]
  */
-function isActive($route) {
-  if(Router::$route == $route) return "active";
+function isActive($route, $class='active') {
+  if(Router::$route == $route) return $class;
 }
 
 /**
@@ -14,13 +14,13 @@ function isActive($route) {
  *
  * @return [type]
  */
-function menuItem($route, $icon=False) {
+function menuItem($route, $icon=False, $extraclass='', $active='active') {
   if($icon) {
-    return "<a class=\"nav-link " . isActive("/$route") . "\" href=\"/$route\">"
+    return "<a class=\"nav-link $extraclass " . isActive("/$route",$active) . "\" href=\"/$route\">"
       . '<i class="' . W::fa($icon) . '"></i> '
       . _t($route) . "</a>";
   } else {
-    return "<a class=\"nav-link " . isActive("/$route") . "\" href=\"/$route\">" . _t($route) . "</a>";
+    return "<a class=\"nav-link " . isActive("/$route",$active) . "\" href=\"/$route\">" . _t($route) . "</a>";
   }
 }
 
@@ -94,13 +94,24 @@ Widget::register('main_menu', function($p1) {
 
 Widget::register('category_menu', function($p1) {
 ?>
-<nav class="nav flex-column navbar-dark bg-dark">
-  <a class="nav-link active" href="/categories">Categorías</a>
-  <a class="nav-link active" href="/uoms">UOMs</a>
-  <a class="nav-link" href="/products">Productos</a>
-  <?php /*
-  <a class="nav-link" href="#">Link</a>
-  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-  */ ?>
-</nav>
+<div class="sticky-top">
+  <nav class="nav flex-column navbar-dark bg-dark">
+    <?= menuItem('categories', 'categories', 'link-secondary', 'link-light') ?>
+    <?= menuItem('uoms', 'uoms', 'link-secondary', 'link-light') ?>
+    <?= menuItem('products', 'products', 'link-secondary', 'link-light') ?>
+  </nav>
+</div>
 <?php });
+
+Widget::register('company_menu', function($p1) {
+  ?>
+  <div class="sticky-top">
+    <nav class="nav flex-column navbar-dark bg-dark">
+      <?= menuItem('companies', 'companies', 'link-secondary', 'link-light') ?>
+      <?= menuItem('farms', 'farms', 'link-secondary', 'link-light') ?>
+      <?= menuItem('parcels', 'parcels', 'link-secondary', 'link-light') ?>
+      <?= menuItem('plots', 'plots', 'link-secondary', 'link-light') ?>
+      <?= menuItem('tasks', 'tasks', 'link-secondary', 'link-light') ?>
+    </nav>
+  </div>
+  <?php });

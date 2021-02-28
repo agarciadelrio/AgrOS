@@ -8,6 +8,9 @@
  * @access public
  */
 class FarmController extends Controller {
+  static $TABLE_NAME = 'farm';
+  static $TABLE_COLUMNS = ['name'];
+
   /**
    * @param mixed $params=[]
    *

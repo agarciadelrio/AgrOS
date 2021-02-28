@@ -8,7 +8,10 @@
  * @access public
  */
 class CompanyController extends Controller {
-
+  static $TABLE_NAME = 'company';
+  static $TABLE_COLUMNS = ['name',
+  'vat','street','street2','zip',
+  'city','state','country_code'];
   /**
    * @param mixed $params=[]
    *

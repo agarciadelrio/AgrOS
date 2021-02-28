@@ -4,6 +4,8 @@
  * [Description ProductController]
  */
 class ProductController extends Controller {
+  static $TABLE_NAME = 'product';
+  static $TABLE_COLUMNS = ['id','name','price','category_id','uom_id'];
 
   /**
    * @param mixed $params=[]
@@ -14,4 +16,5 @@ class ProductController extends Controller {
     $user = Sessions::authenticate();
     self::render('product/_index', $params);
   }
+
 }

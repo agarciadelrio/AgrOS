@@ -8,6 +8,21 @@
  * @access public
  */
 class PlotController extends Controller {
+  static $TABLE_NAME = 'plot';
+  static $TABLE_COLUMNS = ['name'];
+
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
+  public static function index($params=[]) {
+    $user = Sessions::authenticate();
+    $params['ses'] = json_encode($_SESSION);
+    $params['user'] = $user;
+    self::render('plot/_index', $params);
+  }
+
   /**
    * @param mixed $params=[]
    *

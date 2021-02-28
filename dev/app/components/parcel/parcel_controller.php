@@ -8,6 +8,17 @@
  * @access public
  */
 class ParcelController extends Controller {
+  static $TABLE_NAME = 'parcel';
+  static $TABLE_COLUMNS = ['name'];
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
+  public static function index($params=[]) {
+    $user = Sessions::authenticate();
+    self::render('parcel/_index', $params);
+  }
 
   /**
    * @param mixed $params=[]

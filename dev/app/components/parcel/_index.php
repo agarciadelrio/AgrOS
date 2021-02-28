@@ -1,12 +1,12 @@
 <section class="container-fluid p-0">
   <div class="d-flex align-items-stretch">
     <div class="d-none d-sm-block col-2 navbar-dark bg-dark" style="min-height:95vh;">
-      <?= W::category_menu() ?>
+      <?= W::company_menu() ?>
     </div>
     <div id="productModel" class="col-12 col-sm-10 p-3">
       <div class="glass rounded shadow p-3">
         <div class="d-flex justify-content-between m-0">
-          <h1><i class="<?= W::fa('products') ?>"></i> <?= _t('products') ?></h1>
+          <h1><i class="<?= W::fa('parcels') ?>"></i> <?= _t('parcels') ?></h1>
           <div>
             <div id="mainAlert" class="alert alert-dismissible" style="display:none" role="alert">
               <div class="msg">MSG</div>
@@ -102,7 +102,7 @@
     are_you_sure: '¿Quieres continuar para eliminar este Producto?',
   }
 
-  var collection = new Collection('/api/v1/products',{
+  var collection = new Collection('/api/v1/parcels',{
     columns: PRODUCT_COLUMNS,
     messages: PRODUCT_MESSAGES,
   });
