@@ -38,9 +38,9 @@ Widget::register('icons', function($icon) {
     'variety' => 'seedling',
     'cog' => 'cog'
   ];
-  return $icons[$icon[0] ?? 'cog'] ?? 'cog';
+  return $icons[$icon[0] ?? 'cog'] ?? $icon[0];
 });
 
 Widget::register('fa', function($icon) {
-  return "fa fa-fw fa-" . W::icons($icon[0]);
+  return "fa fa-fw fa-" . W::icons($icon[0]) ?? $icon[0];
 });

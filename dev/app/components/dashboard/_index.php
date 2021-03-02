@@ -3,7 +3,9 @@
     <header class="d-flex justify-content-between align-items-center p-0 mb-3">
       <h1 class="p-0 m-0"><i class="<?= W::fa('dashboard') ?>"></i> <?= _t('dashboard') ?></h1>
       <div class="actions">
-        <a href="/pdf/notebook" target="_blank">PDF</a>
+        <a class="btn btn-primary" href="/pdf/notebook" target="_blank">
+          <i class="<?= W::fa('file-pdf') ?>"></i> PDF
+        </a>
       </div>
     </header>
     <hr class="mb-3"/>

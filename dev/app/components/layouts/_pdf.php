@@ -48,6 +48,22 @@
       .text-end {
         text-align: right;
       }
+      footer {
+            position: fixed;
+            left: 0px;
+            bottom: -160px;
+            right: 0px;
+            height: 150px;
+            text-align: right;
+        }
+
+        .page_break {
+            page-break-before: always;
+        }
+
+        .page_number:after {
+            content: counter(page);
+        }
     </style>
   </head>
   <body>
@@ -55,6 +71,11 @@
       <h1>AgrOS</h1>
       <h2 class="text-end">Cuaderno de Campo</h2>
     </header>
-    <?= View::body() ?>
+    <main>
+      <?= View::body() ?>
+    </main>
+    <footer>
+      <div class="page page_number">Página&nbsp;</div>
+    </footer>
   </body>
 </html>

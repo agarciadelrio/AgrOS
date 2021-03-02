@@ -127,6 +127,20 @@ class Controller {
     require COMPONENTS_PATH . "{$options['layout']}.php";
     // instantiate and use the dompdf class
     $dompdf = new Dompdf();
+    $dompdf->setCallbacks(
+      array(
+        'myCallbacks' => array(
+          'event' => 'end_frame', 'f' => function ($infos) {
+            $frame = $infos["frame"];
+            // elements positions
+            $GLOBALS["array_coord"][] = $frame->get_padding_box();
+            // last page number
+            $counter_frame = $frame->lookup_counter_frame('page');
+            $page_number = $counter_frame->counter_value('page');
+          }
+        )
+      )
+    );
     $dompdf->loadHtml(ob_get_clean());
 
     // (Optional) Setup the paper size and orientation
@@ -134,6 +148,8 @@ class Controller {
 
     // Render the HTML as PDF
     $dompdf->render();
+    $ligne_sign = sizeof($GLOBALS["array_coord"]) - 2;
+    $y = $GLOBALS["array_coord"][$ligne_sign]["y"];
 
     // Output the generated PDF to Browser
     $dompdf->stream($options['filename'],['Attachment'=>$options['attachment']]);
