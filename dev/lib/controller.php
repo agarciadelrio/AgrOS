@@ -1,4 +1,7 @@
 <?php
+
+use Dompdf\Dompdf;
+
 /**
  * Controller es la clase base para los controladores
  *
@@ -90,7 +93,6 @@ class Controller {
     die;
   }
 
-
   /**
    * @param string $to
    * @param string $subject
@@ -106,6 +108,35 @@ class Controller {
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
     return mail($to, $subject, $body, $headers);
+  }
+
+  public static function pdf($view, $params=[], $options=[]) {
+    $default = [
+      'size' => 'A4',
+      'orientation' => 'portrait',
+      'filename' => 'cuaderno.pdf',
+      'attachment' => 0,
+      'layout' => '/layouts/_pdf',
+    ];
+    $options = array_merge($default, $options);
+    extract( $params );
+    ob_start();
+    require COMPONENTS_PATH . "/$view.php";
+    View::body(ob_get_clean());
+    ob_start();
+    require COMPONENTS_PATH . "{$options['layout']}.php";
+    // instantiate and use the dompdf class
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml(ob_get_clean());
+
+    // (Optional) Setup the paper size and orientation
+    $dompdf->setPaper($options['size'], $options['orientation']);
+
+    // Render the HTML as PDF
+    $dompdf->render();
+
+    // Output the generated PDF to Browser
+    $dompdf->stream($options['filename'],['Attachment'=>$options['attachment']]);
   }
 
   /******** MÉTODOS CRUD BASE ********/

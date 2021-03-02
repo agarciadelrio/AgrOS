@@ -4,6 +4,11 @@
  * Controlador para métodos comunes del API.
  *
  * Métodos varios para acceso a datos.
+ *
+ * @package Controladores
+ * @author Antonio M. García del Río
+ * @version 0.1
+ * @access public
  */
 class ApiController extends Controller {
   /**

@@ -8,6 +8,8 @@
 
 define('DEBUG', TRUE);
 
+require 'vendor/autoload.php';
+
 define('API_PATH', __DIR__);
 
 //- Clase Sessions
@@ -51,6 +53,9 @@ include API_PATH . '/lib/router.php';
 
 //- Inicialización
 //- Widgets
+if(file_exists('app/widgets/calendar_widget.php')) {
+  require 'app/widgets/calendar_widget.php';
+}
 if(file_exists('app/widgets/forms_widget.php')) {
   require 'app/widgets/forms_widget.php';
 }

@@ -9,6 +9,11 @@
  * @access public
  */
 class TestController extends Controller {
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
   public static function _mail($params=[]) {
 
     $to = 'agarciadelrio@gmail.com';
@@ -35,5 +40,17 @@ class TestController extends Controller {
         'msg' => 'error al enviar email',
       ]);
     }
+  }
+
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
+  public static function _pdf($params=[]) {
+
+    static::pdf('pdf/hello');
+    echo "HOLA";
+    exit;
   }
 }

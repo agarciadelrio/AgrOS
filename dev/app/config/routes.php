@@ -21,6 +21,7 @@ Router::addRoutes([
     "/logout" => "HomeController::logout",
     "/parcel/:id" => "ParcelController::get",
     "/parcels" => "ParcelController::index",
+    "/pdf/notebook" => "DashboardController::_pdf",
     "/plot/:id" => "PlotController::get",
     "/plots" => "PlotController::index",
     "/products" => "ProductController::index",

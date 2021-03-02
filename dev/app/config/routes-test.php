@@ -6,5 +6,6 @@ $r = '/test';
 Router::addRoutes([
   'GET' => [
     "$r/mail" => "TestController::_mail",
+    "$r/pdf" => "TestController::_pdf",
   ],
 ]);

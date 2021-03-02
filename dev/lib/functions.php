@@ -34,6 +34,12 @@ function _t($msg) {
   return TRANSLATIONS[$msg]?? ucfirst(str_replace('_', ' ', $msg));
 }
 
+/**
+ * @param mixed $array
+ * @param mixed $keys
+ *
+ * @return [type]
+ */
 function obj2dict($array, $keys) {
   //return [$array['name'], $keys];
   if ( is_string( $keys ) ) {
@@ -85,4 +91,22 @@ function subjectUtf8($subject) {
  */
 function hs($text) {
   return htmlspecialchars($text, ENT_COMPAT, 'UTF-8');
+}
+
+/**
+ * @return [type]
+ */
+function joinSQL($main_table, $links) {
+  if(!is_array($links)) {
+    $links = explode(',', $links);
+  }
+  $select = ["$main_table.*"];
+  $joins = [];
+  foreach($links as $l) {
+    $select []= "$l.id as {$l}_id, $l.name  as {$l}_name";
+    $joins []= "LEFT JOIN $l ON $main_table.{$l}_id = $l.id";
+  }
+  $joins = implode(' ', $joins);
+  $select = implode(',', $select);
+  return "SELECT $select FROM $main_table $joins";
 }

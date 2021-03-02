@@ -9,7 +9,7 @@
 date_default_timezone_set('Atlantic/Canary');
 
 /** Carga el módulo de ORM RedBeanPHP */
-require 'vendor/rb-mysql.php';
+require 'rb-mysql.php';
 /**
  * Page-level DocBlock
  * @package AgrOS

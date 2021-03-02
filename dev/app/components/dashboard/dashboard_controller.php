@@ -8,6 +8,11 @@
  * @access public
  */
 class DashboardController extends Controller {
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
   public static function index($params=[]) {
     $user = Sessions::authenticate();
     $params['ses'] = json_encode($_SESSION);
@@ -15,6 +20,11 @@ class DashboardController extends Controller {
     self::render('dashboard/_index', $params);
   }
 
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
   public static function profile($params=[]) {
     $user = Sessions::authenticate();
     $params['ses'] = json_encode($_SESSION);
@@ -22,6 +32,11 @@ class DashboardController extends Controller {
     self::render('dashboard/_profile', $params);
   }
 
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
   public static function save_profile($params=[]) {
     $user = Sessions::authenticate();
     extract(obj2dict($params, Profile::$input));
@@ -50,5 +65,17 @@ class DashboardController extends Controller {
       'user' => $user,
       'lastname1' => $lastname1,
     ]);
+  }
+
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
+  public static function _pdf($params=[]) {
+    $user = Sessions::authenticate();
+    $params['tasks'] = R::getAll(joinSQL('task','user,category,product,uom,contact'));
+    //self::json($params);
+    self::pdf('pdf/notebook_pdf', $params);
   }
 }

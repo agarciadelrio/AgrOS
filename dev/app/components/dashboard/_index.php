@@ -1,29 +1,16 @@
 <section class="container-fluid mt-3">
   <div class="glass rounded shadow p-3">
-    <h1><i class="<?= W::fa('dashboard') ?>"></i> <?= _t('dashboard') ?></h1>
-    <hr/>
+    <header class="d-flex justify-content-between align-items-center p-0 mb-3">
+      <h1 class="p-0 m-0"><i class="<?= W::fa('dashboard') ?>"></i> <?= _t('dashboard') ?></h1>
+      <div class="actions">
+        <a href="/pdf/notebook" target="_blank">PDF</a>
+      </div>
+    </header>
+    <hr class="mb-3"/>
     <div class="row">
       <div class="col-3">
         <section id="calendarApp"  class="calendar" data-bind="with: calendar,">
-          <div class="months d-flex flex-column" data-bind="foreach: {data: months, as: 'M'}, css: css">
-            <div class="month">
-              <table>
-                <thead>
-                  <tr>
-                    <th colspan="100%" data-bind="text: name"></th>
-                  </tr>
-                  <tr data-bind="foreach: Month.wdays">
-                    <th data-bind="text: label"></th>
-                  </tr>
-                </thead>
-                <tbody data-bind="foreach: weeks">
-                  <tr data-bind="foreach: {data: $data, as: 'd'}">
-                    <td data-bind="text: d.day, css: d.css">1</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <?= W::calendars() ?>
         </section>
       </div>
       <div class="col-9">
