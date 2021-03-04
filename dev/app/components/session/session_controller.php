@@ -172,8 +172,8 @@ class SessionController extends Controller{
     // Enviar email al admin
     // Notificar al admin para validar cuenta
     $params['title'] = 'REGISTER';
-    $params['message'] = "<strong>Hola, acabamos de recibir tu solicitud de registro.<br/>"
-      . "Te hemos enviado un email de confirmación a $email con las instrucciones para que puedas acceder a la aplicación.</strong>";
+    $params['message'] = "Hola, acabamos de recibir tu solicitud de registro."
+      . "Te hemos enviado un email de confirmación a $email con las instrucciones para que puedas acceder a la aplicación.";
     self::render('home/_mail_sent', $params);
     //self::json([
     //  'msg' => 'register',
@@ -339,8 +339,8 @@ class SessionController extends Controller{
     // Enviar email al admin
     // Notificar al admin para validar cuenta
     $params['title'] = 'VERIFICAR EMAIL';
-    $params['message'] = "<strong>Hola, acabamos de recibir tu solicitud de verificación.<br/>"
-      . "Te hemos enviado un email de confirmación a $email con las instrucciones para que puedas acceder a la aplicación.</strong>";
+    $params['message'] = "Hola, acabamos de recibir tu solicitud de verificación."
+      . "Te hemos enviado un email de confirmación a $email con las instrucciones para que puedas acceder a la aplicación.";
     self::render('home/_mail_sent', $params);
     //self::json($params);
   }
