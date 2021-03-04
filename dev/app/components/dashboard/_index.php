@@ -3,9 +3,10 @@
     <header class="d-flex justify-content-between align-items-center p-0 mb-3">
       <h1 class="p-0 m-0"><i class="<?= W::fa('dashboard') ?>"></i> <?= _t('dashboard') ?></h1>
       <div class="actions">
-        <a class="btn btn-primary" href="/pdf/notebook" target="_blank">
-          <i class="<?= W::fa('file-pdf') ?>"></i> PDF
-        </a>
+        <?= W::list_actions() ?>
+      </div>
+      <div class="">
+      <?= W::list_nav() ?>
       </div>
     </header>
     <hr class="mb-3"/>
@@ -70,6 +71,7 @@
     messages: TASK_MESSAGES,
   });
   const app = new App()
+  window.mainList = collection;
 
   $(function(){
     ko.applyBindings(app, document.getElementById('calendarApp'))

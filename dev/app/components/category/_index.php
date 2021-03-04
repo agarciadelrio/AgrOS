@@ -5,7 +5,7 @@
     </div>
     <div class="col-12 col-sm-10 p-3">
       <div class="glass rounded shadow p-3">
-        <h1><i class="<?= W::fa('categories') ?>"></i> <?= _t('categories') ?></h1>
+        <?= W::list_header('categories') ?>
         <hr/>
         <div id="categoryTree">
           <table class="table">

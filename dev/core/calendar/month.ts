@@ -24,6 +24,8 @@ export class Month {
     {label: 'D'},
   ])
 
+  static months = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+
   constructor(options: MonthOptions|Date) {
     let _weeks = []
     if(options instanceof Date) {
@@ -57,7 +59,7 @@ export class Month {
     }
     this.weeks = ko.observableArray(_weeks)
     this.name = ko.pureComputed(() => {
-      return `${this.year()} ${this.month()+1}`
+      return `${Month.months[this.month()]} ${this.year()}`
     })
   }
 }

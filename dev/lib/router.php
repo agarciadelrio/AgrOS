@@ -81,9 +81,12 @@ final class Router {
           }
         }
         Router::$route = $match[0];
+        // Control de Excepciones global
         try {
+          Log::save('OK', $route, 'ok');
           call_user_func($route, $params);
         } catch (\Throwable $th) {
+          Log::save('ERROR DE SISTEMA', $route, json_encode($params), $th->getMessage());
           Controller::$layout = 'minimal';
           Controller::render('home/_error', ['message' => $th->getMessage()]);
         }
@@ -91,16 +94,13 @@ final class Router {
       }
     }
 
+    Log::save('ERROR 404', $_SERVER['REQUEST_URI'],'','');
     header("HTTP/1.0 404 Not Found");
     Controller::$layout = 'minimal';
     Controller::render('home/_error', [
       'title' => '404 Not Found',
       'message' => '<h2 class="text-dark">' . $url['path'] . '</h2> not found'
     ]);
-    //Controller::json([
-    //  'code' => '404',
-    //  'msg' => $url['path'] . ' not found',
-    //]);
   }
 }
 

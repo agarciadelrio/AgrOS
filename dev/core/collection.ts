@@ -225,4 +225,12 @@ export class Collection {
     }
     return false
   }
+
+  prev() {
+    console.log('PREV')
+  }
+
+  next() {
+    console.log('NEXT')
+  }
 }

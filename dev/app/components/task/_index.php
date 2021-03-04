@@ -18,6 +18,7 @@
               <button data-bind="click: setNew" class="btn btn-success"><i class="fa fa-plus"></i> NUEVA</button>
             </span>
           </div>
+          <div><?= W::list_nav() ?></div>
         </div>
         <hr class="m-0 mb-3"/>
         <div class="row">

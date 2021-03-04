@@ -48,11 +48,17 @@ include API_PATH . '/lib/controller.php';
 //- Clase Widget
 include API_PATH . '/lib/widget.php';
 
+//- Clase Log
+include API_PATH . '/lib/log.php';
+
 //- Clase Enrutador
 include API_PATH . '/lib/router.php';
 
 //- Inicialización
 //- Widgets
+if(file_exists('app/widgets/list_widget.php')) {
+  require 'app/widgets/list_widget.php';
+}
 if(file_exists('app/widgets/calendar_widget.php')) {
   require 'app/widgets/calendar_widget.php';
 }
