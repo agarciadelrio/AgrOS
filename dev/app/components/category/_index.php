@@ -5,60 +5,61 @@
     </div>
     <div class="col-12 col-sm-10 p-3">
       <div class="glass rounded shadow p-3">
-        <?= W::list_header('categories') ?>
+        <header class="row justify-content-between align-items-center p-0 mb-3">
+          <h1 class="col-12 col-sm-auto text-begin"><i class="<?= W::fa('categories') ?>"></i> <?= _t('categories') ?></h1>
+        </header>
         <hr/>
-        <div id="categoryTree">
-          <table class="table">
-            <tbody>
-              <tr>
-                <td>
-                  <div id="categoryTree">
-                    <!-- TREE -->
-                    <div data-bind="template: { name: 'listTemplate' }" class="list-tree"></div>
-                  </div>
-                </td>
-                <td class="w-50">
-                  <?php /*
-                  */ ?>
-                  <?php /* <div data-bind="if: selectedCategory()"> */ ?>
-                  <div class="sticky-top pt-3">
-                    <div class="form-wrapper bg-dark text-light rounded p-3 shadow">
-                      <div data-bind="visible: !selectedCategory()">
-                        <h2><i class="fa fa-edit"></i> Seleccione una Categoría</h2>
-                      </div>
-                      <div data-bind="with: selectedCategory">
-                        <h2><i class="fa fa-edit"></i> <span data-bind="text: name">Categoría</span></h2>
-                        <!-- FORMULARIO -->
-                        <form data-bind="submit: submitData" id="formCategory" action="#" method="post">
-                          <input data-bind="value: id" type="hidden" id="categoryId" readonly disabled>
-                          <div class="mb-3">
-                            <label for="categoryName" class="form-label"><?= _t('name') ?></label>
-                            <input data-bind="value: name" type="text" class="form-control" id="categoryName">
-                          </div>
-                          <div data-bind="visible: parent" class="mb-3">
-                            <label for="categoryParent" class="form-label"><?= _t('parent_category') ?></label>
-                            <select data-bind="
-                              options: tree.options_list,
-                              optionsText: 'text',
-                              optionsValue: 'id',
-                              value: category_id"
-                              class="form-select" id="categoryParent">
-                            </select>
-                          </div>
-                          <div class="mb-3 text-end">
-                            <span data-bind="visible: parent">
-                              <button data-bind="click: deleteMe" class="btn btn-danger"><?= _t('delete') ?></button>
-                            </span>
-                            <button class="btn btn-primary"><?= _t('update') ?></button>
-                          </div>
-                        </form>
-                      </div>
+        <div id="categoryTree" class="row">
+          <div class="col-5">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>
+                    <div id="categoryTree">
+                      <!-- TREE -->
+                      <div data-bind="template: { name: 'listTemplate' }" class="list-tree"></div>
                     </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-7">
+            <div class="sticky-top pt-3">
+              <div class="form-wrapper bg-dark text-light rounded p-3 shadow">
+                <div data-bind="visible: !selectedCategory()">
+                  <h2><i class="fa fa-edit"></i> Seleccione una Categoría</h2>
+                </div>
+                <div data-bind="with: selectedCategory">
+                  <h2><i class="fa fa-edit"></i> <span data-bind="text: name">Categoría</span></h2>
+                  <!-- FORMULARIO -->
+                  <form data-bind="submit: submitData" id="formCategory" action="#" method="post">
+                    <input data-bind="value: id" type="hidden" id="categoryId" readonly disabled>
+                    <div class="mb-3">
+                      <label for="categoryName" class="form-label"><?= _t('name') ?></label>
+                      <input data-bind="value: name" type="text" class="form-control" id="categoryName">
+                    </div>
+                    <div data-bind="visible: parent" class="mb-3">
+                      <label for="categoryParent" class="form-label"><?= _t('parent_category') ?></label>
+                      <select data-bind="
+                        options: tree.options_list,
+                        optionsText: 'text',
+                        optionsValue: 'id',
+                        value: category_id"
+                        class="form-select" id="categoryParent">
+                      </select>
+                    </div>
+                    <div class="mb-3 text-end">
+                      <span data-bind="visible: parent() && ownCategory().length===0">
+                        <button data-bind="click: deleteMe" class="btn btn-danger"><?= _t('delete') ?></button>
+                      </span>
+                      <button class="btn btn-primary"><?= _t('update') ?></button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -75,7 +76,7 @@
   <div data-bind="click: select">
     <span data-bind="text: name"></span>
     <a class="link-success" href="#">
-      <i class="fa fa-plus-square"></i>
+      <i data-bind="click: addCategory" class="fa fa-plus-square"></i>
     </a>
   </div>
   <div data-bind="template: { name: 'listTemplate' }"></div>
@@ -94,6 +95,36 @@ class Item {
       item.ownCategory.map(i => new Item(tree, this, i))
     )
   }
+
+  addCategory() {
+    console.log('ADD CATEGORY')
+    var new_category = prompt('Nueva Categoría','')
+    if(new_category) {
+      fetch('/api/v1/category',{
+        method: 'POST',
+        body: JSON.stringify({
+          name: new_category,
+          category_id: this.id,
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('DATA CATEGORY', data)
+        // Crear categoría
+        var cat = new Item(this.tree, this, {
+          id: data.id,
+          name: data.item.name,
+          category_id: data.item.category_id,
+          ownCategory: [],
+        })
+        location.reload();
+      })
+      .catch(err => {
+        console.error('ERROR CREANDO CATEGORIA: ', err)
+      })
+    }
+  }
+
   select() {
     this.tree.selectedCategory(this)
   }
@@ -101,7 +132,18 @@ class Item {
     console.log('DELETE', this)
     console.log('ITEM',item)
     if(confirm(`¿Quiere continuar para eliminar esta categoría: ${this.name()}?`)) {
-
+      fetch('/api/v1/category/delete',{
+        method: 'POST',
+        body: JSON.stringify({
+          id: this.id,
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('DATA', data)
+        location.reload();
+      })
+      .catch(error => console.error('ERROR AL ELIMINAR', error))
     }
     return false
   }

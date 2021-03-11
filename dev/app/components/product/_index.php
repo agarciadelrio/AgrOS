@@ -3,112 +3,66 @@
     <div class="d-none d-sm-block col-2 navbar-dark bg-dark" style="min-height:95vh;">
       <?= W::category_menu() ?>
     </div>
-    <div id="productModel" class="col-12 col-sm-10 p-3">
+    <div class="col-12 col-sm-10 p-3">
       <div class="glass rounded shadow p-3">
-        <div class="d-flex justify-content-between m-0">
-          <h1><i class="<?= W::fa('products') ?>"></i> <?= _t('products') ?></h1>
-          <div>
-            <div id="mainAlert" class="alert alert-dismissible" style="display:none" role="alert">
-              <div class="msg">MSG</div>
-              <button data-bind="click: Collection.closeAlert" type="button" class="btn-close"></button>
-            </div>
-          </div>
-          <div>
-            <span data-bind="visible: 'edit'==state()">
-              <button data-bind="click: setNew" class="btn btn-success"><i class="fa fa-plus"></i> NUEVA</button>
-            </span>
-          </div>
-          <div><?= W::list_nav() ?></div>
+        <div id="mainHeader" data-bind="template: 'headerTemplate'" class="container-fluid p-0">
         </div>
         <hr class="m-0 mb-3"/>
-        <div class="row">
-          <div id="productTable" class="col-6">
-            <!-- TABLA -->
-            <table class="table table-sm table-striped table-hover">
-              <thead>
-                <tr data-bind="foreach: table_columns">
-                  <th data-bind="text: $data"></th>
-                </tr>
-              </thead>
-              <tbody data-bind="foreach: {data: items, as: 'item'} ">
-                <tr data-bind="foreach: {data: $parent.table_columns, as: 'name'}">
-                  <td data-bind="
-                    click: item.select.bind(item),
-                    class: item.columns()[name].tdClass(),
-                    "
-                    class="cursor-pointer">
-                    <span data-bind="text: item.columns()[name].value"></span>
-                    </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-6">
-            <div data-bind="with: newItem" id="productForm"
-              class="form-wrapper bg-dark text-light rounded p-3 shadow sticky-top">
-              <h2 data-bind="visible: 'new'==collection.state()" class="pb-1">Crear Nueva Producto</h2>
-              <h2 data-bind="visible: 'edit'==collection.state()" class="pb-1">Modificar Producto</h2>
-              <!-- FORMULARIO -->
-              <form data-bind="submit: Collection.dataSave" action="#" method="post">
-                <div data-bind="foreach: {data: column_names, as: 'cn'}">
-                  <div data-bind="with: $parent.columns()[cn]" class="row mb-md-3 g-2">
-                    <label data-bind="text: cn, visible: 'hidden'!=type()" class="col-sm-3 col-form-label"></label>
-                    <div class="col-sm-9">
-                      <input data-bind="
-                        value: value,
-                        attr:{
-                          type: type,
-                          required: (options().required||null) ? true:false,
-                          step: type()=='number' ? options().step||false : false,
-                        },
-                        "
-                        type="text" class="form-control"/>
-                      <!--div data-bind="text: ko.toJSON(options())">OPTION</div-->
-                    </div>
+        <section class="container-fluid p-0 m-0">
+          <div class="row">
+            <div class="col col-sm-4 col-md-6">
+              <div id="mainTable" >
+                <div class="table-responsive" data-bind="template: {name: 'tableTemplate', data: collection}"></div>
+              </div>
+            </div>
+            <div class="col col-sm-8 col-md-6 pt-0">
+              <div id="mainForm" class="bg-dark text-light shadow rounded pt-1">
+                <header class="row px-3">
+                  <h3 data-bind="text: formTitle" class="p-0 ps-2 col"></h3>
+                  <div data-bind="if: globalMsg" class="col-auto">
+                    <div data-bind="text: globalMsg"
+                      class="bg-warning p-0 px-2 py-1 m-0 mt-2 d-flex align-items-center shadow text-dark">TAL MENSAJE</div>
                   </div>
-                </div>
-                <div class="text-end">
-                  <span data-bind="visible: 'edit'==collection.state()">
-                    <button data-bind="click: Collection.deleteMe" class="btn btn-danger">ELIMINAR</button>
-                    <button _data-bind="click: Collection.save" class="btn btn-primary">GUARDAR</button>
-                  </span>
-                  <span data-bind="visible: 'new'==collection.state()">
-                    <button _data-bind="click: Collection.save" class="btn btn-success"><i class="fa fa-plus"></i> GUARDAR</button>
-                  </span>
-                </div>
-              </form>
+                </header>
+                <form data-bind="submit: sendData, template: {name: 'formTemplate' , data: collection}" class="form m-0 p-0 pt-3">
+                </form>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   </div>
 </section>
 
 <script>
-(function() {
+window.ICONS = <?= json_encode(ICONS) ?>;
+console.log('ICONS', ICONS);
+const product_form_columns = [
+  'name!', 'code|16!', '"description|250',
+  //'^uom_id',
+  '$price!',
+  //'+state!', '?buyable',
+  //'^category_id',
+  '#category_id',
+  '#uom_id!',
+  //'^user_id',
+]
 
-  const PRODUCT_COLUMNS  = {
-    id:{type: 'hidden'},
-    name:{required:1},
-    category_id:{required:1},
-    uom_id:{required:1},
-    price:{type:'number', step:'any', required:1, td: 'text-end'},
-  }
+const product_list_columns = [
+  '#=',
+  //'id',
+  'name',
+  'code=',
+  'category_id^',
+  'price^',
+  'uom_id^',
+  //'user_id^',
+]
 
-  const PRODUCT_MESSAGES = {
-    create: 'Nuevo Producto creado correctamente',
-    update: 'Producto modificado correctamente',
-    delete: 'Producto eliminado correctamente',
-    are_you_sure: '¿Quieres continuar para eliminar este Producto?',
-  }
-
-  var collection = new Collection('/api/v1/products',{
-    columns: PRODUCT_COLUMNS,
-    messages: PRODUCT_MESSAGES,
-  });
-  $(function() {
-    ko.applyBindings(collection, document.getElementById('productModel'))
-  })
-}).call(this)
+const app2 = new App2('/api/v1', 'product', product_form_columns, product_list_columns)
+ko.applyBindings(app2, document.getElementById('mainTable'))
+app2.loadData()
+ko.applyBindings(app2, document.getElementById('mainForm'))
+ko.applyBindings(app2, document.getElementById('mainHeader'))
 </script>

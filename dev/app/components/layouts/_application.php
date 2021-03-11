@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/styles.css">
     <script src="/index.js"></script>
     <?= View::headScripts() ?>
+    <? include 'ko-templates.php' ?>
   </head>
   <body class="application <?= View::bodyClassTheme() ?>">
     <div class="<?= View::bodyWrapperClass() ?>">

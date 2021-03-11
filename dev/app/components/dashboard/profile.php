@@ -8,7 +8,7 @@ class Profile extends Model {
     'email',
     'mobile',
     'phone',
-    'profile_photo_url',
+    #'profile_photo_url',
     'street',
     'street2',
     'city',
@@ -24,7 +24,7 @@ class Profile extends Model {
     'email' => ['col'=>'md-4','type'=>'email','size'=>'sm', 'required'=>TRUE, ],
     'mobile' => ['col'=>'md-4','type'=>'text','size'=>'sm',],
     'phone' => ['col'=>'md-4','type'=>'text','size'=>'sm',],
-    'profile_photo_url' => ['col'=>'md-4','type'=>'text','size'=>'sm',],
+    #'profile_photo_url' => ['col'=>'md-4','type'=>'text','size'=>'sm',],
   ];
   static $form2 = [
     'street' => ['col'=>'md-4','type'=>'text','size'=>'sm',],

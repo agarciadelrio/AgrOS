@@ -11,6 +11,7 @@ import { Task } from './core/task'
 import { JQueryEventHandlerBase } from 'select2'
 import { Collection } from './core/collection'
 import { Calendar } from './core/calendar/calendar'
+import { App as App2 } from './core/app'
 
 declare global {
   interface Window {
@@ -22,6 +23,7 @@ declare global {
     Task: typeof Task
     Collection: typeof Collection
     App: typeof App
+    App2: typeof App2
   }
   interface SelectOptions {
     id: number|string
@@ -118,6 +120,7 @@ export class App {
 }
 
 window.App = App
+window.App2 = App2
 window.bootstrap = bootstrap
 window.ko = ko
 window.Task = Task

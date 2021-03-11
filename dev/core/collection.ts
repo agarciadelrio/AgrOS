@@ -99,7 +99,11 @@ export class Collection {
   selectedItem
   items
   stuff
+  page
+  limit
+  order
   constructor(url, options) {
+    console.log('NEW COLLECTION')
     Collection.url = url
     Collection.self = this
     this.columns = options.columns
@@ -117,6 +121,9 @@ export class Collection {
     }))
     this.selectedItem = ko.observable({})
     this.items = ko.observableArray([])
+    this.page = ko.observable(1)
+    this.limit = ko.observable(50)
+    this.order = ko.observable(options.order || '')
     this.load()
   }
   setNew() {
@@ -130,7 +137,12 @@ export class Collection {
     this.state('new')
   }
   load() {
-    fetch(Collection.url)
+    let url = Collection.url + '?' + new URLSearchParams([
+      ['page',this.page().toString()],
+      ['limit',this.limit().toString()],
+      ['order', this.order()],
+    ]).toString()
+    fetch(url)
     .then(response => response.json())
     .then(data => {
       //console.log('DATA LOADED', data)
@@ -225,12 +237,14 @@ export class Collection {
     }
     return false
   }
-
   prev() {
+    Collection.self.page(Collection.self.page()-1)
+    Collection.self.load()
     console.log('PREV')
   }
-
   next() {
-    console.log('NEXT')
+    Collection.self.page(Collection.self.page()+1)
+    Collection.self.load()
+    console.log('NEXT', Collection.self.page())
   }
 }

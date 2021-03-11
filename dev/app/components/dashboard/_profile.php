@@ -1,6 +1,6 @@
 <section class="container-fluid mt-3">
   <div class="glass rounded shadow p-3">
-    <h1><i class="fa fa-fw fa-address-card"></i> Profile <?= hs($user->name) ?></h1>
+    <h1><i class="fa fa-fw fa-address-card"></i> Perfil: <?= hs($user->name) ?></h1>
     <hr/>
     <form action="#" method="post" autocomplete="off" class="mt-4 p-0">
       <div class="fields-wrapper">
@@ -14,8 +14,8 @@
           </div>
       </div>
       <div class="text-end mt-3">
-        <a href="/dashboard" class="btn btn-warning" >Cancel</a>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <a href="/dashboard" class="btn btn-warning" >Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
       </div>
     </form>
   </div>

@@ -118,4 +118,44 @@ class CategoryController extends Controller {
       ]);
     }
   }
+
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
+  public static function create($params=[]) {
+    $user = Sessions::authenticate();
+    $json = file_get_contents('php://input');
+    $category_data = json_decode($json);
+    $category = R::dispense('category');
+    $category->import($category_data, 'name,category_id');
+    $id = R::store($category);
+    self::json([
+      'msg' => 'CATEGORY CREATED',
+      'item' => $category,
+      'id' => $id,
+      'data' => $category_data,
+    ]);
+  }
+
+  /**
+   * @param mixed $params=[]
+   *
+   * @return [type]
+   */
+  public static function remove($params=[]) {
+    $user = Sessions::authenticate();
+    $json = file_get_contents('php://input');
+    $category_data = json_decode($json);
+    $category = R::load('category', $category_data->id);
+    if($category) {
+      R::trash( $category );
+      self::json([
+        'msg' => 'CATEGORY DELETED',
+        'id' => $category_data->id,
+        'data' => $category_data,
+      ]);
+    }
+  }
 }

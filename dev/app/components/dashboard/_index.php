@@ -1,42 +1,19 @@
-<section class="container-fluid mt-3">
+<section class="container-fluid my-3">
   <div class="glass rounded shadow p-3">
-    <header class="d-flex justify-content-between align-items-center p-0 mb-3">
-      <h1 class="p-0 m-0"><i class="<?= W::fa('dashboard') ?>"></i> <?= _t('dashboard') ?></h1>
-      <div class="actions">
-        <?= W::list_actions() ?>
-      </div>
-      <div class="">
-      <?= W::list_nav() ?>
-      </div>
-    </header>
+    <?= W::list_header('dashboard') ?>
     <hr class="mb-3"/>
     <div class="row">
-      <div class="col-3">
-        <section id="calendarApp"  class="calendar" data-bind="with: calendar,">
+      <div class="col-12 col-sm-4 col-md-3">
+        <section id="calendarApp" class="d-none d-sm-block calendar" data-bind="with: calendar,">
           <?= W::calendars() ?>
         </section>
+        <select class="d-sm-none form-select form-select-sm mb-3">
+          <option value="">Seleccione fecha</option>
+        </select>
       </div>
-      <div class="col-9">
-        <div id="taskModel">
-          <!-- TABLA -->
-          <table class="table table-sm table-striped table-hover">
-            <thead>
-              <tr data-bind="foreach: table_columns">
-                <th data-bind="text: $data"></th>
-              </tr>
-            </thead>
-            <tbody data-bind="foreach: {data: items, as: 'item'} ">
-              <tr data-bind="foreach: {data: $parent.table_columns, as: 'name'}">
-                <td data-bind="
-                  click: item.select.bind(item),
-                  class: item.columns()[name].tdClass(),
-                  "
-                  class="cursor-pointer">
-                  <span data-bind="text: item.columns()[name].table_value"></span>
-                  </td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="col-12 col-sm-8 col-md-9">
+        <div id="taskModel" class="table-responsive">
+          <?= W::table() ?>
         </div>
       </div>
     </div>
@@ -46,7 +23,7 @@
 <script>
 (function() {
   const TASK_COLUMNS  = {
-    id:{type: 'hidden'},
+    id:{hide_col:true, type: 'hidden'},
     date:{type:'date', required:1},
     time:{hide_col:true, type:'time'},
     contact_id:{},
@@ -69,6 +46,7 @@
   const collection = new Collection('/api/v1/tasks',{
     columns: TASK_COLUMNS,
     messages: TASK_MESSAGES,
+    order: 'date:2',
   });
   const app = new App()
   window.mainList = collection;

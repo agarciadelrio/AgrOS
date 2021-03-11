@@ -21,6 +21,8 @@ Router::addRoutes([
   ],
   'POST' => [
     "$r/category/update" => "CategoryController::update",
+    "$r/category/delete" => "CategoryController::remove",
+    "$r/category" => "CategoryController::create",
 
     "$r/companies/:id/delete" => "CompanyController::delete",
     "$r/companies/:id" => "CompanyController::update",

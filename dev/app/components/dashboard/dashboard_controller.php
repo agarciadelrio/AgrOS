@@ -17,6 +17,7 @@ class DashboardController extends Controller {
     $user = Sessions::authenticate();
     $params['ses'] = json_encode($_SESSION);
     $params['user'] = $user;
+    $params['label_col'] = 3;
     self::render('dashboard/_index', $params);
   }
 
